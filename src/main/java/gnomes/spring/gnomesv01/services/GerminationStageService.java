@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SowingStageServiceService implements StageService {
+public class GerminationStageService implements StageService {
+
     private StageRepository stageRepository;
 
-    public SowingStageServiceService(@Qualifier("sowingStageRepository") StageRepository stageRepository){
+    //constructor dependency injection
+    public GerminationStageService(@Qualifier("germinationStageRepository") StageRepository stageRepository){
         this.stageRepository = stageRepository;
     }
-
 }
