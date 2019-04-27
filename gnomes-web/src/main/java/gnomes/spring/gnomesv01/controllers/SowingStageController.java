@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class SowingStageController {
 
-    @RequestMapping({"", "/", "home", "home.html"})
-    public String home(){
+    @RequestMapping({"/sowingstage", "sowingstage.html"})
+    public String sowingstage(){
         //thyme leaf will lookup a template called index
-        return "home";
+        return "sowingstage";
     }
 }
