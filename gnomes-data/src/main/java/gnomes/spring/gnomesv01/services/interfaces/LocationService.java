@@ -1,4 +1,4 @@
-package gnomes.spring.gnomesv01.services;
+package gnomes.spring.gnomesv01.services.interfaces;
 
 import gnomes.spring.gnomesv01.models.Location;
 

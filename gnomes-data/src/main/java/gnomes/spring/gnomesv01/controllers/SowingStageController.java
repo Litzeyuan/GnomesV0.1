@@ -1,6 +1,6 @@
 package gnomes.spring.gnomesv01.controllers;
 
-import gnomes.spring.gnomesv01.services.StageService;
+import gnomes.spring.gnomesv01.services.interfaces.StageService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 
@@ -10,7 +10,7 @@ public class SowingStageController {
     private StageService stageService;
 
     //constructor dependency injection to wire sowing StageService explicitly
-    public SowingStageController(@Qualifier("sowingStageService") StageService stageService){
+    public SowingStageController(@Qualifier("sowingStageServiceImpl") StageService stageService){
         this.stageService = stageService;
     }
 
