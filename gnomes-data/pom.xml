@@ -73,6 +73,7 @@
                 <executions>
                     <execution>
                         <goals>
+                            <!--configure to skip repackage in the properties tag -->
                             <goal>repackage</goal>
                         </goals>
                     </execution>
