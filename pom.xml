@@ -17,7 +17,7 @@
 
     <groupId>gnomes.spring</groupId>
     <artifactId>gnomesv01</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>gnomesv01</name>
     <description>gnomes helper version 0.1</description>
 
@@ -49,6 +49,6 @@
 
     <scm>
         <developerConnection>scm:git:git@github.com:Litzeyuan/gnomesv01.git</developerConnection>
-      <tag>gnomesv01-0.0.1</tag>
+      <tag>HEAD</tag>
   </scm>
 </project>
