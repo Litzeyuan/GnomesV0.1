@@ -1,13 +1,12 @@
 package gnomes.spring.gnomesv01.models;
 
-import gnomes.spring.gnomesv01.interfaces.Crop;
-
 import java.time.LocalDate;
 
 public class CropImpl implements Crop {
 
     // might not need all those details
     // do we need a crop name ?
+    private long    cropId;
     private String  location;//?
     private	int     bedId;//?
     private String  family;//

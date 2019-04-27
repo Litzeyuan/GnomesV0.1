@@ -1,9 +1,8 @@
 package gnomes.spring.gnomesv01.models;
 
-import gnomes.spring.gnomesv01.interfaces.Bed;
-
 public class BedImpl implements Bed {
 
+    private long        bedId;
     private String      name;
     private int         length;
     private int         width;

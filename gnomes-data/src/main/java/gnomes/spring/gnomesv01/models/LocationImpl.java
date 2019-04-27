@@ -2,6 +2,7 @@ package gnomes.spring.gnomesv01.models;
 
 public class LocationImpl {
 
+    private long    locationId;
     private String  name;
     private String  address;
     private int     bedsAmount;
