@@ -19,7 +19,27 @@ public class SowingStageService implements StageService {
     }
 
     @Override
-    public Stage findById(long id) {
+    public Stage findById(Long id) {
+        return null;
+    }
+
+    @Override
+    public void save(Stage object) {
+
+    }
+
+    @Override
+    public void delete(Stage object) {
+
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
+
+    @Override
+    public Long count() {
         return null;
     }
 

@@ -2,13 +2,7 @@ package gnomes.spring.gnomesv01.services;
 
 import gnomes.spring.gnomesv01.models.Stage;
 
-import java.util.Set;
-
-public interface StageService {
-
-    Stage findById(Long id);
+public interface StageService extends CRUDService<Stage,Long> {
 
     Stage findByName(String name);
-
-    Set<Stage> findAll();
 }
