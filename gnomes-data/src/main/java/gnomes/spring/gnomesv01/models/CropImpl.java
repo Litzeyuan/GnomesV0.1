@@ -2,11 +2,11 @@ package gnomes.spring.gnomesv01.models;
 
 import java.time.LocalDate;
 
-public class CropImpl implements Crop {
+public class CropImpl extends BaseEntity implements Crop {
 
     // might not need all those details
     // do we need a crop name ?
-    private long    cropId;
+    private Long    cropId;
     private String  location;//?
     private	int     bedId;//?
     private String  family;//

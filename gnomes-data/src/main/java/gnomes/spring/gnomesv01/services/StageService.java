@@ -6,7 +6,7 @@ import java.util.Set;
 
 public interface StageService {
 
-    Stage findById(long id);
+    Stage findById(Long id);
 
     Stage findByName(String name);
 

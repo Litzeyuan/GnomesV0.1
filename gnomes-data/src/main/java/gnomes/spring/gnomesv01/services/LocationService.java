@@ -6,7 +6,7 @@ import java.util.Set;
 
 public interface LocationService {
 
-    Location findById(long id);
+    Location findById(Long id);
 
     Location findByName(String name);
 

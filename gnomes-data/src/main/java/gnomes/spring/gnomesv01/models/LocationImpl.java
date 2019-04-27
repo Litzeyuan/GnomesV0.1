@@ -1,8 +1,8 @@
 package gnomes.spring.gnomesv01.models;
 
-public class LocationImpl {
+public class LocationImpl extends BaseEntity implements Location{
 
-    private long    locationId;
+    private Long    locationId;
     private String  name;
     private String  address;
     private int     bedsAmount;

@@ -1,8 +1,9 @@
 package gnomes.spring.gnomesv01.models;
 
-public class BedImpl implements Bed {
 
-    private long        bedId;
+public class BedImpl extends BaseEntity implements Bed{
+
+    private Long        bedId;
     private String      name;
     private int         length;
     private int         width;
