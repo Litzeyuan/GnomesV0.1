@@ -1,12 +1,14 @@
 package gnomes.spring.gnomesv01.models;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 public class Location extends BaseEntity {
 
     private Long    id;
     private String  name;
     private String  address;
-    private int     bedsAmount;
-
+    private Map<String, List<Bed>> areaMap = new HashMap();
 
     @Override
     public Long getId() {
@@ -34,11 +36,23 @@ public class Location extends BaseEntity {
         this.address = address;
     }
 
-    public int getBedsAmount() {
-        return bedsAmount;
+    public Map<String, List<Bed>> getAreaMap() {
+        return areaMap;
     }
 
-    public void setBedsAmount(int bedsAmount) {
-        this.bedsAmount = bedsAmount;
+    public void setAreaMap(Map<String, List<Bed>> areaMap) {
+        this.areaMap = areaMap;
+    }
+
+    public int getAreasAmount() {
+        return areaMap.size();
+    }
+
+    public int getBedsAmount() {
+        int beds = 0;
+        for (List list :areaMap.values()) {
+            beds += list.size();
+        }
+        return beds;
     }
 }

@@ -1,11 +1,11 @@
 package gnomes.spring.gnomesv01.services.map;
 
 import gnomes.spring.gnomesv01.models.Bed;
-import gnomes.spring.gnomesv01.services.interfaces.CRUDService;
+import gnomes.spring.gnomesv01.services.interfaces.BedService;
 
 import java.util.Set;
 
-public class BedServiceMap extends AbstractMapService<Bed, Long> implements CRUDService<Bed, Long> {
+public class BedServiceMap extends AbstractMapService<Bed, Long> implements BedService {
     @Override
     public Set<Bed> findAll() {
         return findAll();

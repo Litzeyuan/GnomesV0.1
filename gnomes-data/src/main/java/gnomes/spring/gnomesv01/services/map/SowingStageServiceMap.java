@@ -1,11 +1,11 @@
 package gnomes.spring.gnomesv01.services.map;
 
 import gnomes.spring.gnomesv01.models.SowingStage;
-import gnomes.spring.gnomesv01.services.interfaces.CRUDService;
+import gnomes.spring.gnomesv01.services.interfaces.SowingStageService;
 
 import java.util.Set;
 
-public class SowingStageServiceMap extends AbstractMapService<SowingStage, Long>  implements CRUDService<SowingStage, Long> {
+public class SowingStageServiceMap extends AbstractMapService<SowingStage, Long>  implements SowingStageService {
     @Override
     public Set<SowingStage> findAll() {
         return super.findAll();
@@ -34,5 +34,10 @@ public class SowingStageServiceMap extends AbstractMapService<SowingStage, Long>
     @Override
     public void save(SowingStage sowingStage) {
         super.save(sowingStage.getId(), sowingStage);
+    }
+
+    @Override
+    public SowingStage findByName(String name) {
+        return null;
     }
 }

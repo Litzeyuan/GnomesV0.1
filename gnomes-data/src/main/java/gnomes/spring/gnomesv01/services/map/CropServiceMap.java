@@ -1,11 +1,11 @@
 package gnomes.spring.gnomesv01.services.map;
 
 import gnomes.spring.gnomesv01.models.Crop;
-import gnomes.spring.gnomesv01.services.interfaces.CRUDService;
+import gnomes.spring.gnomesv01.services.interfaces.CropService;
 
 import java.util.Set;
 
-public class CropServiceMap extends AbstractMapService<Crop, Long> implements CRUDService<Crop,Long> {
+public class CropServiceMap extends AbstractMapService<Crop, Long> implements CropService {
 
     @Override
     public Set<Crop> findAll() {
@@ -35,5 +35,15 @@ public class CropServiceMap extends AbstractMapService<Crop, Long> implements CR
     @Override
     public void save(Crop crop) {
         super.save(crop.getId(), crop);
+    }
+
+    @Override
+    public Crop findByFamily(String family) {
+        return null;
+    }
+
+    @Override
+    public Crop findByVariety(String variety) {
+        return null;
     }
 }
