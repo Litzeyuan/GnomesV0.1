@@ -50,8 +50,10 @@ public class Location extends BaseEntity {
 
     public int getBedsAmount() {
         int beds = 0;
-        for (List list :areaMap.values()) {
-            beds += list.size();
+        if (areaMap.values().size() > 0){
+            for (List list :areaMap.values()) {
+                beds += list.size();
+            }
         }
         return beds;
     }

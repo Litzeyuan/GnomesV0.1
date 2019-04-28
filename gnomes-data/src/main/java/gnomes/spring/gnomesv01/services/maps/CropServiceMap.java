@@ -1,10 +1,12 @@
-package gnomes.spring.gnomesv01.services.map;
+package gnomes.spring.gnomesv01.services.maps;
 
 import gnomes.spring.gnomesv01.models.Crop;
 import gnomes.spring.gnomesv01.services.interfaces.CropService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class CropServiceMap extends AbstractMapService<Crop, Long> implements CropService {
 
     @Override
@@ -34,7 +36,7 @@ public class CropServiceMap extends AbstractMapService<Crop, Long> implements Cr
 
     @Override
     public void save(Crop crop) {
-        super.save(crop.getId(), crop);
+        super.save(crop);
     }
 
     @Override

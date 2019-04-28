@@ -1,10 +1,12 @@
-package gnomes.spring.gnomesv01.services.map;
+package gnomes.spring.gnomesv01.services.maps;
 
 import gnomes.spring.gnomesv01.models.Bed;
 import gnomes.spring.gnomesv01.services.interfaces.BedService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class BedServiceMap extends AbstractMapService<Bed, Long> implements BedService {
     @Override
     public Set<Bed> findAll() {
@@ -33,6 +35,6 @@ public class BedServiceMap extends AbstractMapService<Bed, Long> implements BedS
 
     @Override
     public void save(Bed bed) {
-        super.save(bed.getId(), bed);
+        super.save(bed);
     }
 }

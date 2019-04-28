@@ -1,10 +1,12 @@
-package gnomes.spring.gnomesv01.services.map;
+package gnomes.spring.gnomesv01.services.maps;
 
 import gnomes.spring.gnomesv01.models.GerminationStage;
 import gnomes.spring.gnomesv01.services.interfaces.GerminationStageService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class GerminationStageServiceMap extends AbstractMapService<GerminationStage,Long> implements GerminationStageService {
     @Override
     public Set<GerminationStage> findAll() {
@@ -33,7 +35,7 @@ public class GerminationStageServiceMap extends AbstractMapService<GerminationSt
 
     @Override
     public void save(GerminationStage germinationStage) {
-        super.save(germinationStage.getId(), germinationStage);
+        super.save(germinationStage);
 
     }
 

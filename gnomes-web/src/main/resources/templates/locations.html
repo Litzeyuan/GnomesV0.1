@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Gnomes Helper</title>
 </head>
     <h1>Gnomes Helper - Locations</h1>
 <body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+    </tr>
+
+    <!-- iterating the table to get all rows -->
+
+    <tr th:each="location: ${locations}">
+        <td th:text="${location.id}"></td>
+        <td th:text="${location.name}"></td>
+        <td th:text="${location.address}"></td>
+    </tr>
+</table>
 
 </body>
 </html>

@@ -1,10 +1,12 @@
-package gnomes.spring.gnomesv01.services.map;
+package gnomes.spring.gnomesv01.services.maps;
 
 import gnomes.spring.gnomesv01.models.Location;
 import gnomes.spring.gnomesv01.services.interfaces.LocationService;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class LocationServiceMap extends AbstractMapService<Location, Long> implements LocationService {
     @Override
     public Set<Location> findAll() {
@@ -33,7 +35,7 @@ public class LocationServiceMap extends AbstractMapService<Location, Long> imple
 
     @Override
     public void save(Location location) {
-        super.save(location.getId(), location);
+        super.save(location);
     }
 
     @Override
