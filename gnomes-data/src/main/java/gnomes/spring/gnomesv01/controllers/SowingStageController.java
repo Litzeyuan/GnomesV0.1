@@ -10,7 +10,7 @@ public class SowingStageController {
     private StageService stageService;
 
     //constructor dependency injection to wire sowing StageService explicitly
-    public SowingStageController(@Qualifier("sowingStageServiceImpl") StageService stageService){
+    public SowingStageController(@Qualifier("sowingStageServiceMap") StageService stageService){
         this.stageService = stageService;
     }
 

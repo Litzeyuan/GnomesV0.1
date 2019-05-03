@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    @RequestMapping({"", "/", "home", "home.html"})
+    //the path can be either empty or / or /home
+    @RequestMapping({"", "/", "/home", "home.html"})
     public String home(){
-        //thyme leaf will lookup a template called index
+        //thyme leaf will lookup a template called home
         return "home";
     }
 }

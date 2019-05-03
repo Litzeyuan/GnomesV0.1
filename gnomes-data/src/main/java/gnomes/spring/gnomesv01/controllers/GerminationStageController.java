@@ -10,7 +10,7 @@ public class GerminationStageController {
     private StageService stageService;
 
     //constructor dependency injection to wire germination StageService explicitly
-    public GerminationStageController(@Qualifier("germinationStageServiceImpl") StageService stageService){
+    public GerminationStageController(@Qualifier("germinationStageServiceMap") StageService stageService){
         this.stageService = stageService;
     }
 
