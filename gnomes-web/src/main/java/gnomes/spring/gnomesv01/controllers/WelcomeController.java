@@ -4,12 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class WelcomeController {
 
     //the path can be either empty or / or /home
-    @RequestMapping({"", "/", "/home", "home.html"})
-    public String home(){
+    @RequestMapping({"", "/", "/welcome", "welcome.html"})
+    public String welcome(){
         //thyme leaf will lookup a template called home
-        return "home";
+        return "welcome";
     }
 }
