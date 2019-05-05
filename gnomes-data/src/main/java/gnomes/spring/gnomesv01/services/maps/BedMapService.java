@@ -2,20 +2,23 @@ package gnomes.spring.gnomesv01.services.maps;
 
 import gnomes.spring.gnomesv01.models.Bed;
 import gnomes.spring.gnomesv01.services.interfaces.BedService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class BedServiceMap extends AbstractMapService<Bed, Long> implements BedService {
+@Profile({"default", "maps"})
+public class BedMapService extends AbstractMapService<Bed, Long> implements BedService {
     @Override
     public Set<Bed> findAll() {
-        return findAll();
+        return super.findAll();
     }
 
     @Override
     public Bed findById(Long id) {
-        return findById(id);
+        return super.findById(id);
     }
 
     @Override
@@ -24,7 +27,7 @@ public class BedServiceMap extends AbstractMapService<Bed, Long> implements BedS
     }
 
     @Override
-    public int count() {
+    public Long count() {
         return super.count();
     }
 
@@ -34,7 +37,13 @@ public class BedServiceMap extends AbstractMapService<Bed, Long> implements BedS
     }
 
     @Override
-    public void save(Bed bed) {
-        super.save(bed);
+    public Bed save(Bed bed) {
+        return super.save(bed);
+    }
+
+
+    @Override
+    public Optional<Bed> findByName(String name) {
+        return null;
     }
 }

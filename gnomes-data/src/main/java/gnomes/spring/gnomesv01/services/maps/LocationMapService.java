@@ -2,12 +2,15 @@ package gnomes.spring.gnomesv01.services.maps;
 
 import gnomes.spring.gnomesv01.models.Location;
 import gnomes.spring.gnomesv01.services.interfaces.LocationService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class LocationServiceMap extends AbstractMapService<Location, Long> implements LocationService {
+@Profile({"default", "maps"})
+public class LocationMapService extends AbstractMapService<Location, Long> implements LocationService {
     @Override
     public Set<Location> findAll() {
         return super.findAll();
@@ -24,7 +27,7 @@ public class LocationServiceMap extends AbstractMapService<Location, Long> imple
     }
 
     @Override
-    public int count() {
+    public Long count() {
         return super.count();
     }
 
@@ -34,12 +37,12 @@ public class LocationServiceMap extends AbstractMapService<Location, Long> imple
     }
 
     @Override
-    public void save(Location location) {
-        super.save(location);
+    public Location save(Location location) {
+        return super.save(location);
     }
 
     @Override
-    public Location findByName(String name) {
+    public Optional<Location> findByName(String name) {
         return null;
     }
 }

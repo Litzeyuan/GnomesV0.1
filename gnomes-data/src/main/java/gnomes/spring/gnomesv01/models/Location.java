@@ -1,14 +1,34 @@
 package gnomes.spring.gnomesv01.models;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.lang.Nullable;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name = "locations")
 public class Location extends BaseEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long    id;
     private String  name;
     private String  address;
-    private Map<String, List<Bed>> areaMap = new HashMap();
+    @Column(nullable = true)
+    @Nullable
+    private int totalAreas;
+    @Column(nullable = true)
+    @Nullable
+    private int totalBeds;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="location")
+    private Set<Area> areas;
+
+    public Location(){};
+    public Location(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
 
     @Override
     public Long getId() {
@@ -36,25 +56,28 @@ public class Location extends BaseEntity {
         this.address = address;
     }
 
-    public Map<String, List<Bed>> getAreaMap() {
-        return areaMap;
+    public Set<Area> getAreas() {
+        return areas;
     }
 
-    public void setAreaMap(Map<String, List<Bed>> areaMap) {
-        this.areaMap = areaMap;
+    public void setAreas(Set<Area> areas) {
+        this.areas = areas;
     }
 
-    public int getAreasAmount() {
-        return areaMap.size();
+    public int getTotalAreas() {
+        return areas.size();
     }
 
-    public int getBedsAmount() {
+    public int getTotalBeds() {
         int beds = 0;
-        if (areaMap.values().size() > 0){
-            for (List list :areaMap.values()) {
-                beds += list.size();
-            }
-        }
+        for (Area area :areas)
+            beds += area.bedsCount();
+
         return beds;
+    }
+
+    public void addArea(Area area){
+        area.setLocation(this);
+        areas.add(area);
     }
 }

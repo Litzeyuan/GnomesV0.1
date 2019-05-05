@@ -1,19 +1,29 @@
 package gnomes.spring.gnomesv01.models;
 
-import java.time.LocalDate;
+import org.springframework.lang.Nullable;
 
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Set;
+
+@Entity
+@Table(name = "crops")
 public class Crop extends BaseEntity{
 
     // might not need all those details
     // do we need a crop name ?
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long    id;
-    private String  location;//?
-    private	int     bedId;//?
     private String  family;//
     private	String  variety;
+    @Column(nullable = true)
+    @Nullable
     private	int     quantity;
     private	String  sowingType;     // seed or module or direct
     private	String  rowSpacing;     // cm - number or seed or module
+    @Column(nullable = true)
+    @Nullable
     private	int     plantSpacing;   // cm
     private	String  trayUsed;       // a number or direct
     private	String  sowingPerCell;	// a number or seed or direct
@@ -21,7 +31,26 @@ public class Crop extends BaseEntity{
     private	String  seedVender;
     private LocalDate seedBoughtDate;
     private LocalDate seedExpiration;
+    private String currentStage;
+    @Lob
+    private String notes;
 
+    public Crop(){};
+
+    public Crop(String family, String variety) {
+        this.family = family;
+        this.variety = variety;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="crop")
+    private Set<Stage> stages;
+
+    //eager, load all at once
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "crop_bed",
+            joinColumns = @JoinColumn(name = "crop_id"),
+            inverseJoinColumns = @JoinColumn(name = "bed_id"))
+    private Set<Bed> beds;
 
     @Override
     public Long getId() {
@@ -33,20 +62,12 @@ public class Crop extends BaseEntity{
         this.id = id;
     }
 
-    public String getLocation() {
-        return location;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public int getBedId() {
-        return bedId;
-    }
-
-    public void setBedId(int bedId) {
-        this.bedId = bedId;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public String getFamily() {
@@ -143,5 +164,38 @@ public class Crop extends BaseEntity{
 
     public void setSeedExpiration(LocalDate seedExpiration) {
         this.seedExpiration = seedExpiration;
+    }
+
+    public String getCurrentStage() {
+        return currentStage;
+    }
+
+    public void setCurrentStage(String currentStage) {
+        this.currentStage = currentStage;
+    }
+
+    public Set<Stage> getStages() {
+        return stages;
+    }
+
+    public void setStages(Set<Stage> stages) {
+        this.stages = stages;
+    }
+
+    public Set<Bed> getBeds() {
+        return beds;
+    }
+
+    public void setBeds(Set<Bed> beds) {
+        this.beds = beds;
+    }
+
+    public void addBed(Bed bed){
+        this.beds.add(bed);
+    }
+
+    public void addStage(Stage stage){
+        stage.setCrop(this);
+        this.stages.add(stage);
     }
 }

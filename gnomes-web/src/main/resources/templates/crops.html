@@ -1,11 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Gnomes Helper</title>
 </head>
     <h1>Gnomes Helper - Crops</h1>
 <body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Family</th>
+        <th>Variety</th>
+        <th>Quantity</th>
+        <th>Plant Spacing</th>
+    </tr>
+
+    <!-- iterating the table to get all rows -->
+
+    <tr th:each="crop:${crops}">
+        <td th:text="${crop.id}"></td>
+        <td th:text="${crop.family}"></td>
+        <td th:text="${crop.variety}"></td>
+        <td th:text="${crop.quantity}"></td>
+        <td th:text="${crop.plantSpacing}"></td>
+    </tr>
+</table>
 
 </body>
 </html>

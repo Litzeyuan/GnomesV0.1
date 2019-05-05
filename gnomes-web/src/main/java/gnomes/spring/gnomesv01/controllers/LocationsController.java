@@ -14,7 +14,7 @@ public class LocationsController {
         this.locationService = locationService;
     }
 
-    @RequestMapping("/locations")
+    @RequestMapping({"/locations", "locations.html"})
     public String locations(Model model){
         model.addAttribute("locations",locationService.findAll());
 
