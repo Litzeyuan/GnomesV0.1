@@ -1,8 +1,15 @@
 package gnomes.spring.gnomesv01.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "areas")
 public class Area extends BaseEntity{
@@ -11,13 +18,9 @@ public class Area extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     @Column(nullable = true)
     private int totalBeds;
-
-    public Area(){};
-    public Area(String name) {
-        this.name = name;
-    }
 
     //CascadeType.ALL if deletes an area, will casecade down to delete all beds
     @OneToMany(cascade=CascadeType.ALL, mappedBy="area")
@@ -27,50 +30,20 @@ public class Area extends BaseEntity{
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Area(){};
+    public Area(String name) {
         this.name = name;
     }
 
-    public Set<Bed> getBeds() {
-        return beds;
+
+    // helper method
+    public int getTotalBeds() {
+        return beds.size();
     }
 
-    public void setBeds(Set<Bed> beds) {
-        this.beds = beds;
-    }
-
+    // helper method
     public void addBed(Bed bed){
         bed.setArea(this);
         this.beds.add(bed);
-    }
-
-    public int bedsCount(){
-        return beds.size();
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public int getTotalBeds() {
-        return beds.size();
     }
 }

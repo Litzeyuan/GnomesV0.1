@@ -1,8 +1,6 @@
 package gnomes.spring.gnomesv01.services.maps;
 
 import gnomes.spring.gnomesv01.models.Crop;
-import gnomes.spring.gnomesv01.repositories.BedRepository;
-import gnomes.spring.gnomesv01.repositories.CropRepository;
 import gnomes.spring.gnomesv01.services.interfaces.CropService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -13,14 +11,6 @@ import java.util.Set;
 @Service
 @Profile({"default", "maps"})
 public class CropMapService extends AbstractMapService<Crop, Long> implements CropService {
-
-    private CropRepository cropRepository;
-    private BedRepository bedRepository;
-
-    public CropMapService(CropRepository cropRepository, BedRepository bedRepository) {
-        this.cropRepository = cropRepository;
-        this.bedRepository = bedRepository;
-    }
 
     @Override
     public Set<Crop> findAll() {
@@ -53,7 +43,7 @@ public class CropMapService extends AbstractMapService<Crop, Long> implements Cr
     }
 
     @Override
-    public Optional<Crop> findByFamily(String family) {
+    public Optional<Crop> findByName(String name) {
         return null;
     }
 

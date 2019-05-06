@@ -4,6 +4,7 @@ import gnomes.spring.gnomesv01.models.Location;
 import gnomes.spring.gnomesv01.repositories.AreaRepository;
 import gnomes.spring.gnomesv01.repositories.LocationRepository;
 import gnomes.spring.gnomesv01.services.interfaces.LocationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 @Service
 @Profile("jpaServices")
 public class LocationJPAService implements LocationService {

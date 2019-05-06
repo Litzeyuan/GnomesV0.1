@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface CropRepository extends CrudRepository<Crop,Long> {
-    Optional<Crop> findByFamily(String family);
+    Optional<Crop> findByName(String name);
     Optional<Crop> findByVariety(String variety);
 }

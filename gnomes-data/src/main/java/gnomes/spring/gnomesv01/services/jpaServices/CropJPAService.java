@@ -4,6 +4,7 @@ import gnomes.spring.gnomesv01.models.Crop;
 import gnomes.spring.gnomesv01.repositories.BedRepository;
 import gnomes.spring.gnomesv01.repositories.CropRepository;
 import gnomes.spring.gnomesv01.services.interfaces.CropService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 @Service
 @Profile("jpaServices")
 public class CropJPAService implements CropService {
@@ -24,8 +26,8 @@ public class CropJPAService implements CropService {
     }
 
     @Override
-    public Optional<Crop> findByFamily(String family) {
-        return cropRepository.findByFamily(family);
+    public Optional<Crop> findByName(String name) {
+        return cropRepository.findByName(name);
     }
 
     @Override

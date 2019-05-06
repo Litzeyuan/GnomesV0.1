@@ -11,6 +11,7 @@ import java.util.Set;
 @Service
 @Profile({"default", "maps"})
 public class AreaMapService extends AbstractMapService<Area, Long> implements AreaService{
+
     @Override
     public Set<Area> findAll() {
         return super.findAll();
