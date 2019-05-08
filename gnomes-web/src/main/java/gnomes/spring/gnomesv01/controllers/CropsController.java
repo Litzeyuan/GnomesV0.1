@@ -16,7 +16,7 @@ public class CropsController {
 
 
     @RequestMapping({"/crops", "crops.html"})
-    public String crops(Model model){
+    public String getCropsPage(Model model){
         //thyme leaf will lookup a template called crops
         model.addAttribute("crops", cropService.findAll());
         return "crops";

@@ -1,30 +1,56 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>Gnomes Helper</title>
+    <!-- Bootstrap CDN -->
+    <!--  CSS  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--  JS  -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
-    <h1>Gnomes Helper - Crops</h1>
 <body>
 
 <table>
-    <tr>
-        <th>ID</th>
-        <th>Family</th>
-        <th>Variety</th>
-        <th>Quantity</th>
-        <th>Plant Spacing</th>
-    </tr>
-
-    <!-- iterating the table to get all rows -->
-
-    <tr th:each="crop:${crops}">
-        <td th:text="${crop.id}"></td>
-        <td th:text="${crop.family}"></td>
-        <td th:text="${crop.variety}"></td>
-        <td th:text="${crop.quantity}"></td>
-        <td th:text="${crop.plantSpacing}"></td>
-    </tr>
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <!-- to be centered  -->
+            <div class="col-md-6 col-md-offset-3">
+<!--                <div class="header">-->
+<!--                    <div class="header-panel">-->
+                    <h1>Gnomes Helper - Crops</h1>
+<!--                    </div>-->
+                    <div class="card-body">
+<!--                        won't display the table if the crops are empty -->
+                        <div class="table-responsive" th:if="${not #lists.isEmpty(crops)}">
+                            <table class="table table-hover">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Crop Name</th>
+                                    <th>Variety</th>
+                                    <th>Current Stage</th>
+                                    <th>Notes</th>
+                                </tr>
+                                </thead>
+                                <tr th:each="crop : ${crops}">
+                                    <td th:text="${crop.id}"></td>
+                                    <td th:text="${crop.name}"></td>
+                                    <td th:text="${crop.variety}"></td>
+                                    <td th:text="${crop.currentStage}"></td>
+                                    <td th:text="${crop.notes}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
 </table>
 
 </body>
