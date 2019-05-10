@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Profile({"default", "maps"})
+@Profile("maps")
 public class CropMapService extends AbstractMapService<Crop, Long> implements CropService {
 
     @Override
@@ -43,11 +43,19 @@ public class CropMapService extends AbstractMapService<Crop, Long> implements Cr
 
     @Override
     public Crop findByName(String name) {
-        return null;
+        return this.findAll()
+                .stream()
+                .filter(crop -> crop.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public Crop findByVariety(String variety) {
-        return null;
+        return this.findAll()
+                .stream()
+                .filter(crop -> crop.getVariety().equalsIgnoreCase(variety))
+                .findFirst()
+                .orElse(null);
     }
 }

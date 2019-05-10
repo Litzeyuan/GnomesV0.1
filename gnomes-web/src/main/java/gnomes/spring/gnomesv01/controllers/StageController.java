@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class StageController {
 
-    @RequestMapping({"/stage", "stage.html"})
-    public String getStagePage(){
+    @RequestMapping("/listStages")
+    public String listStages(){
         //thyme leaf will lookup a template called stage
         return "stage";
     }

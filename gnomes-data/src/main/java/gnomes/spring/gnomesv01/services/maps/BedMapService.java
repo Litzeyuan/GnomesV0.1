@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Profile({"default", "maps"})
+@Profile("maps")
 public class BedMapService extends AbstractMapService<Bed, Long> implements BedService {
     @Override
     public List<Bed> findAll() {
@@ -43,6 +43,10 @@ public class BedMapService extends AbstractMapService<Bed, Long> implements BedS
 
     @Override
     public Bed findByName(String name) {
-        return null;
+        return this.findAll()
+                .stream()
+                .filter(bed -> bed.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 }

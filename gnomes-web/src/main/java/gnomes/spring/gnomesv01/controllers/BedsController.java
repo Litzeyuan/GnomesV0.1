@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BedsController {
 
-    @RequestMapping({"/beds", "beds.html"})
-    public String getBedsPage(){
+    @RequestMapping("/listBeds")
+    public String listBeds(){
         //thyme leaf will lookup a template called beds
         return "beds";
     }

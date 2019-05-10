@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Profile({"default", "maps"})
+@Profile("maps")
 public class LocationMapService extends AbstractMapService<Location, Long> implements LocationService {
     @Override
     public List<Location> findAll() {
@@ -42,6 +42,10 @@ public class LocationMapService extends AbstractMapService<Location, Long> imple
 
     @Override
     public Location findByName(String name) {
-        return null;
+        return this.findAll()
+                .stream()
+                .filter(location -> location.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 }

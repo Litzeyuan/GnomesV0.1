@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Profile({"default", "maps"})
+@Profile("maps")
 public class AreaMapService extends AbstractMapService<Area, Long> implements AreaService{
 
     @Override
@@ -43,6 +43,10 @@ public class AreaMapService extends AbstractMapService<Area, Long> implements Ar
 
     @Override
     public Area findByName(String name) {
-        return null;
+        return this.findAll()
+                .stream()
+                .filter(area -> area.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-@Profile("jpaServices")
+@Profile({"default","jpaServices"})
 public class AreaJPAService implements AreaService {
     AreaRepository areaRepository;
     BedRepository bedRepository;

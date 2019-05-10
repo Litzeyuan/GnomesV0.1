@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-@Profile("jpaServices")
+@Profile({"default","jpaServices"})
 public class BedJPAService implements BedService {
     BedRepository bedRepository;
     CropRepository cropRepository;

@@ -40,7 +40,10 @@ public class Area extends BaseEntity{
 
     // helper method
     public int getTotalBeds() {
-        return beds.size();
+        if (beds == null)
+            return 0;
+        else
+            return beds.size();
     }
 
     // helper method

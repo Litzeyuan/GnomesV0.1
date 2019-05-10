@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Profile({"default", "maps"})
+@Profile("maps")
 public class StageMapService extends AbstractMapService<Stage,Long> implements StageService {
     @Override
     public List<Stage> findAll() {
@@ -42,6 +42,10 @@ public class StageMapService extends AbstractMapService<Stage,Long> implements S
 
     @Override
     public Stage findByName(String name) {
-        return null;
+        return this.findAll()
+                .stream()
+                .filter(stage -> stage.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
 }
