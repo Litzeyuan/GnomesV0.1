@@ -5,15 +5,14 @@ import gnomes.spring.gnomesv01.services.interfaces.AreaService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 @Service
 @Profile({"default", "maps"})
 public class AreaMapService extends AbstractMapService<Area, Long> implements AreaService{
 
     @Override
-    public Set<Area> findAll() {
+    public List<Area> findAll() {
         return super.findAll();
     }
 
@@ -43,7 +42,7 @@ public class AreaMapService extends AbstractMapService<Area, Long> implements Ar
     }
 
     @Override
-    public Optional<Area> findByName(String name) {
+    public Area findByName(String name) {
         return null;
     }
 }

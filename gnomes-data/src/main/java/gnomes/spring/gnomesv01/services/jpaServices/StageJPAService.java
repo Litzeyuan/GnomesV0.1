@@ -7,9 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -23,16 +22,16 @@ public class StageJPAService implements StageService {
     }
 
     @Override
-    public Optional<Stage> findByName(String name) {
+    public Stage findByName(String name) {
         log.debug("StageJPAService - findByName", name);
         return stageRepository.findByName(name);
     }
 
     @Override
-    public Set<Stage> findAll() {
+    public List<Stage> findAll() {
         log.debug("StageJPAService - findAll");
 
-        Set<Stage> stages = new HashSet<>();
+        List<Stage> stages = new ArrayList<>();
         stageRepository.findAll().forEach(stages::add);
         return stages;
     }

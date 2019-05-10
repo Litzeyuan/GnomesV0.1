@@ -3,11 +3,13 @@ package gnomes.spring.gnomesv01.models;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Data
+@EqualsAndHashCode(exclude={"beds","location"})
 @Builder
 @AllArgsConstructor
 @Entity
@@ -24,7 +26,7 @@ public class Area extends BaseEntity{
 
     //CascadeType.ALL if deletes an area, will casecade down to delete all beds
     @OneToMany(cascade=CascadeType.ALL, mappedBy="area")
-    private Set<Bed> beds;
+    private List<Bed> beds;
 
     @ManyToOne
     @JoinColumn(name = "location_id")

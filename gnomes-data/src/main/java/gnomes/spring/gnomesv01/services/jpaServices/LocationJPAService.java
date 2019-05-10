@@ -8,9 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -26,13 +25,13 @@ public class LocationJPAService implements LocationService {
     }
 
     @Override
-    public Optional<Location> findByName(String name) {
+    public Location findByName(String name) {
         return locationRepository.findByName(name);
     }
 
     @Override
-    public Set<Location> findAll() {
-        Set<Location> locations = new HashSet<>();
+    public List<Location> findAll() {
+        List<Location> locations = new ArrayList<>();
         locationRepository.findAll().forEach(locations::add);
         return locations;
     }

@@ -3,11 +3,13 @@ package gnomes.spring.gnomesv01.models;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
+@EqualsAndHashCode(exclude="crop")
 @Builder
 @AllArgsConstructor
 @Entity

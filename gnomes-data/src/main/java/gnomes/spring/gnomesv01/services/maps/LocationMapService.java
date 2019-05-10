@@ -5,14 +5,13 @@ import gnomes.spring.gnomesv01.services.interfaces.LocationService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 @Service
 @Profile({"default", "maps"})
 public class LocationMapService extends AbstractMapService<Location, Long> implements LocationService {
     @Override
-    public Set<Location> findAll() {
+    public List<Location> findAll() {
         return super.findAll();
     }
 
@@ -42,7 +41,7 @@ public class LocationMapService extends AbstractMapService<Location, Long> imple
     }
 
     @Override
-    public Optional<Location> findByName(String name) {
+    public Location findByName(String name) {
         return null;
     }
 }

@@ -8,9 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -26,18 +25,18 @@ public class CropJPAService implements CropService {
     }
 
     @Override
-    public Optional<Crop> findByName(String name) {
+    public Crop findByName(String name) {
         return cropRepository.findByName(name);
     }
 
     @Override
-    public Optional<Crop> findByVariety(String variety) {
+    public Crop findByVariety(String variety) {
         return cropRepository.findByVariety(variety);
     }
 
     @Override
-    public Set<Crop> findAll() {
-        Set<Crop> crops = new HashSet<>();
+    public List<Crop> findAll() {
+        List<Crop> crops = new ArrayList<>();
         cropRepository.findAll().forEach(crops::add);
         return crops;
     }

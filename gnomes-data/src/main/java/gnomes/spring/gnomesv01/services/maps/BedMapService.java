@@ -5,14 +5,13 @@ import gnomes.spring.gnomesv01.services.interfaces.BedService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 @Service
 @Profile({"default", "maps"})
 public class BedMapService extends AbstractMapService<Bed, Long> implements BedService {
     @Override
-    public Set<Bed> findAll() {
+    public List<Bed> findAll() {
         return super.findAll();
     }
 
@@ -43,7 +42,7 @@ public class BedMapService extends AbstractMapService<Bed, Long> implements BedS
 
 
     @Override
-    public Optional<Bed> findByName(String name) {
+    public Bed findByName(String name) {
         return null;
     }
 }

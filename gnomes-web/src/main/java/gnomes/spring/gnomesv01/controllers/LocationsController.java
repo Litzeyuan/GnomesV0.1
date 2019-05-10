@@ -15,7 +15,7 @@ public class LocationsController {
     }
 
     @RequestMapping({"/locations", "locations.html"})
-    public String locations(Model model){
+    public String getLocationsPage(Model model){
         model.addAttribute("locations",locationService.findAll());
 
         //thyme leaf will lookup a template called locations

@@ -5,15 +5,14 @@ import gnomes.spring.gnomesv01.services.interfaces.CropService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 @Service
 @Profile({"default", "maps"})
 public class CropMapService extends AbstractMapService<Crop, Long> implements CropService {
 
     @Override
-    public Set<Crop> findAll() {
+    public List<Crop> findAll() {
         return super.findAll();
     }
 
@@ -43,12 +42,12 @@ public class CropMapService extends AbstractMapService<Crop, Long> implements Cr
     }
 
     @Override
-    public Optional<Crop> findByName(String name) {
+    public Crop findByName(String name) {
         return null;
     }
 
     @Override
-    public Optional<Crop> findByVariety(String variety) {
+    public Crop findByVariety(String variety) {
         return null;
     }
 }

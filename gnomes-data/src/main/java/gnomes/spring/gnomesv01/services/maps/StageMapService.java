@@ -5,14 +5,13 @@ import gnomes.spring.gnomesv01.services.interfaces.StageService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 @Service
 @Profile({"default", "maps"})
 public class StageMapService extends AbstractMapService<Stage,Long> implements StageService {
     @Override
-    public Set<Stage> findAll() {
+    public List<Stage> findAll() {
         return super.findAll();
     }
 
@@ -42,7 +41,7 @@ public class StageMapService extends AbstractMapService<Stage,Long> implements S
     }
 
     @Override
-    public Optional<Stage> findByName(String name) {
+    public Stage findByName(String name) {
         return null;
     }
 }

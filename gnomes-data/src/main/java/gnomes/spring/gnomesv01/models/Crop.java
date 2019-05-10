@@ -3,12 +3,15 @@ package gnomes.spring.gnomesv01.models;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Data
+@EqualsAndHashCode(exclude={"stages","beds"})
 @Builder
 @AllArgsConstructor
 @Entity
@@ -36,7 +39,7 @@ public class Crop extends BaseEntity{
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="crop")
-    private Set<Stage> stages;
+    private List<Stage> stages;
 
     //eager, load all at once
     @ManyToMany(fetch = FetchType.EAGER)

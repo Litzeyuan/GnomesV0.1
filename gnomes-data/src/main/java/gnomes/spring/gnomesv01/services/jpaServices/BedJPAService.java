@@ -8,9 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -25,17 +24,17 @@ public class BedJPAService implements BedService {
     }
 
     @Override
-    public Optional<Bed> findByName(String name) {
+    public Bed findByName(String name) {
         log.debug("BedJPAService - findByName", name);
 
         return bedRepository.findByName(name);
     }
 
     @Override
-    public Set<Bed> findAll() {
+    public List<Bed> findAll() {
         log.debug("BedJPAService - findAll");
 
-        Set<Bed> beds = new HashSet<>();
+        List<Bed> beds = new ArrayList<>();
         bedRepository.findAll().forEach(beds::add);
         return beds;
     }

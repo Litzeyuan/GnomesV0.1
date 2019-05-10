@@ -3,12 +3,14 @@ package gnomes.spring.gnomesv01.models;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Data
+@EqualsAndHashCode(exclude="areas")
 @Builder
 @AllArgsConstructor
 @Entity
@@ -30,7 +32,7 @@ public class Location extends BaseEntity {
     private int totalBeds;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="location")
-    private Set<Area> areas;
+    private List<Area> areas;
 
     public Location(){};
 

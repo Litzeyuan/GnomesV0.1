@@ -1,15 +1,14 @@
 package gnomes.spring.gnomesv01.services.interfaces;
 
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
 
 public interface CRUDService<T,Long> {
 
-    Set<T> findAll();
+    List<T> findAll();
 
     T findById(Long id);
 
-    Optional<T> findByName(String name);
+    T findByName(String name);
 
     T save(T object);
 

@@ -8,7 +8,7 @@ public class WelcomeController {
 
     //the path can be either empty or / or /home
     @RequestMapping({"", "/", "/welcome", "welcome.html"})
-    public String welcome(){
+    public String getWelcomePage(){
         //thyme leaf will lookup a template called home
         return "welcome";
     }

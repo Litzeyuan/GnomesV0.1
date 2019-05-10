@@ -3,12 +3,14 @@ package gnomes.spring.gnomesv01.models;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Data
+@EqualsAndHashCode(exclude={"area","crops"})
 @Builder
 @AllArgsConstructor
 @Entity
@@ -35,7 +37,7 @@ public class Bed extends BaseEntity{
     private Area area;
 
     @ManyToMany(mappedBy = "beds")
-    private Set<Crop> crops;
+    private List<Crop> crops;
 
     public Bed(){};
     public Bed(String name) {
