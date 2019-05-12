@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 @Profile({"default","jpaServices"})
 public class AreaJPAService implements AreaService {
-    AreaRepository areaRepository;
-    BedRepository bedRepository;
+    private AreaRepository areaRepository;
+    private BedRepository bedRepository;
 
     public AreaJPAService(AreaRepository areaRepository, BedRepository bedRepository) {
         this.areaRepository = areaRepository;

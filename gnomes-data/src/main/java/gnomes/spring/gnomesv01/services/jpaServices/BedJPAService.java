@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 @Profile({"default","jpaServices"})
 public class BedJPAService implements BedService {
-    BedRepository bedRepository;
-    CropRepository cropRepository;
+    private BedRepository bedRepository;
+    private CropRepository cropRepository;
 
     public BedJPAService(BedRepository bedRepository, CropRepository cropRepository) {
         this.bedRepository = bedRepository;

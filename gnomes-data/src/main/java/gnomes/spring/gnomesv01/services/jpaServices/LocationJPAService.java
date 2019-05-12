@@ -16,8 +16,8 @@ import java.util.List;
 @Profile({"default","jpaServices"})
 public class LocationJPAService implements LocationService {
 
-    LocationRepository locationRepository;
-    AreaRepository areaRepository;
+    private LocationRepository locationRepository;
+    private AreaRepository areaRepository;
 
     public LocationJPAService(LocationRepository locationRepository, AreaRepository areaRepository) {
         this.locationRepository = locationRepository;

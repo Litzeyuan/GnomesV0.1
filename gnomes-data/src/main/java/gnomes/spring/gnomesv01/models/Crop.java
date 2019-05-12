@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @EqualsAndHashCode(exclude={"stages","beds"})
@@ -46,7 +45,7 @@ public class Crop extends BaseEntity{
     @JoinTable(name = "crop_bed",
             joinColumns = @JoinColumn(name = "crop_id"),
             inverseJoinColumns = @JoinColumn(name = "bed_id"))
-    private Set<Bed> beds;
+    private List<Bed> beds;
 
     // helper method
     public void addBed(Bed bed){

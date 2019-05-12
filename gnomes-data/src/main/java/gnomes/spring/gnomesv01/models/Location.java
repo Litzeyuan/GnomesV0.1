@@ -25,10 +25,6 @@ public class Location extends BaseEntity {
 
     @Column(nullable = true)
     @Nullable
-    private int totalAreas;
-
-    @Column(nullable = true)
-    @Nullable
     private int totalBeds;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="location")
@@ -44,8 +40,10 @@ public class Location extends BaseEntity {
     // helper method
     public int getTotalBeds() {
         int beds = 0;
-        for (Area area :areas)
-            beds += area.getTotalBeds();
+        if(areas != null) {
+            for (Area area : areas)
+                beds += area.getTotalBeds();
+        }
         return beds;
     }
 
