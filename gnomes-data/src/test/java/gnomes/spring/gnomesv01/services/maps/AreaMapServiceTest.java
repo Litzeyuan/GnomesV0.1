@@ -30,7 +30,7 @@ class AreaMapServiceTest {
 
     @Test
     void findById() {
-        assertEquals(id,areaMapService.findById(id).getId());
+        assertEquals(id,areaMapService.findById(id).get().getId());
     }
 
     @Test
@@ -47,7 +47,7 @@ class AreaMapServiceTest {
 
     @Test
     void delete() {
-        areaMapService.delete(areaMapService.findById(id));
+        areaMapService.delete(areaMapService.findById(id).get());
         assertEquals(0,areaMapService.findAll().size());
     }
 
@@ -69,7 +69,7 @@ class AreaMapServiceTest {
 
     @Test
     void findByName() {
-        Area area = areaMapService.findByName(name);
+        Area area = areaMapService.findByName(name).get();
         assertNotNull(area);
         assertEquals(id,area.getId());
 
@@ -77,7 +77,7 @@ class AreaMapServiceTest {
 
     @Test
     void findByNameNotExist() {
-        Area area = areaMapService.findByName("name2");
+        Area area = areaMapService.findByName("name2").get();
         assertNull(area);
     }
 }

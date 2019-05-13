@@ -30,7 +30,7 @@ class BedMapServiceTest {
 
     @Test
     void findById() {
-        assertEquals(id,bedMapService.findById(id).getId());
+        assertEquals(id,bedMapService.findById(id).get().getId());
     }
 
     @Test
@@ -47,7 +47,7 @@ class BedMapServiceTest {
 
     @Test
     void delete() {
-        bedMapService.delete(bedMapService.findById(id));
+        bedMapService.delete(bedMapService.findById(id).get());
         assertEquals(0, bedMapService.findAll().size());
     }
 
@@ -59,6 +59,6 @@ class BedMapServiceTest {
 
     @Test
     void findByName() {
-        assertEquals(name,bedMapService.findByName(name).getName());
+        assertEquals(name,bedMapService.findByName(name).get().getName());
     }
 }

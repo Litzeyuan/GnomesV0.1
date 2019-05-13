@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -25,12 +26,12 @@ public class CropJPAService implements CropService {
     }
 
     @Override
-    public Crop findByName(String name) {
+    public Optional<Crop> findByName(String name) {
         return cropRepository.findByName(name);
     }
 
     @Override
-    public Crop findByVariety(String variety) {
+    public Optional<Crop> findByVariety(String variety) {
         return cropRepository.findByVariety(variety);
     }
 
@@ -42,8 +43,14 @@ public class CropJPAService implements CropService {
     }
 
     @Override
-    public Crop findById(Long id) {
-        return  cropRepository.findById(id).orElse(null);
+    public Optional<Crop> findById(Long id) {
+        Optional<Crop> crop = cropRepository.findById(id);
+
+        if (!crop.isPresent())
+            throw new RuntimeException("Crop not found");
+
+        return  crop;
+
     }
 
     @Override

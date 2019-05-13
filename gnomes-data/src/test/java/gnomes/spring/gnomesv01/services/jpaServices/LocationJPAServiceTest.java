@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -40,8 +41,8 @@ class LocationJPAServiceTest {
 
     @Test
     void findByName() {
-        when(locationRepository.findByName(any())).thenReturn(location);
-        Location location1 = locationJPAService.findByName(name);
+        when(locationRepository.findByName(any())).thenReturn(Optional.of(location));
+        Location location1 = locationJPAService.findByName(name).get();
 
         assertEquals(location, location1);
         assertEquals(name, location1.getName());
@@ -66,7 +67,7 @@ class LocationJPAServiceTest {
     @Test
     void findById() {
         when(locationRepository.findById(anyLong())).thenReturn(Optional.of(location));
-        assertEquals(id,locationJPAService.findById(id).getId());
+        assertEquals(id,locationJPAService.findById(id).get().getId());
         verify(locationRepository, times(1)).findById(id);
     }
 
@@ -79,14 +80,14 @@ class LocationJPAServiceTest {
     @Test
     void delete() {
         locationJPAService.delete(location);
-        assertNull(locationJPAService.findById(id));
+        assertEquals(Optional.empty(), locationJPAService.findById(id));
         verify(locationRepository).delete(any());
     }
 
     @Test
     void deleteById() {
         locationJPAService.deleteById(id);
-        assertNull(locationJPAService.findById(id));
+        assertEquals(Optional.empty(), locationJPAService.findById(id));
         verify(locationRepository).deleteById(anyLong());
     }
 

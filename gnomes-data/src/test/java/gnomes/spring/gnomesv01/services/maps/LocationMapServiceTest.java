@@ -30,7 +30,7 @@ class LocationMapServiceTest {
 
     @Test
     void findById() {
-        assertEquals(id,locationMapService.findById(id).getId());
+        assertEquals(id,locationMapService.findById(id).get().getId());
     }
 
     @Test
@@ -47,7 +47,7 @@ class LocationMapServiceTest {
 
     @Test
     void delete() {
-        locationMapService.delete(locationMapService.findById(id));
+        locationMapService.delete(locationMapService.findById(id).get());
         assertEquals(0, locationMapService.findAll().size());
     }
 
@@ -59,6 +59,6 @@ class LocationMapServiceTest {
 
     @Test
     void findByName() {
-        assertEquals(name,locationMapService.findByName(name).getName());
+        assertEquals(name,locationMapService.findByName(name).get().getName());
     }
 }

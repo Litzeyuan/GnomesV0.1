@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -24,7 +25,7 @@ public class BedJPAService implements BedService {
     }
 
     @Override
-    public Bed findByName(String name) {
+    public Optional<Bed> findByName(String name) {
         log.debug("BedJPAService - findByName", name);
 
         return bedRepository.findByName(name);
@@ -40,10 +41,10 @@ public class BedJPAService implements BedService {
     }
 
     @Override
-    public Bed findById(Long id) {
+    public Optional<Bed> findById(Long id) {
         log.debug("BedJPAService - findById", id);
 
-        return bedRepository.findById(id).orElse(null);
+        return bedRepository.findById(id);
     }
 
     @Override

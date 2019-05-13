@@ -31,7 +31,7 @@ class CropMapServiceTest {
 
     @Test
     void findById() {
-        assertEquals(id,cropMapService.findById(id).getId());
+        assertEquals(id,cropMapService.findById(id).get().getId());
     }
 
     @Test
@@ -48,7 +48,7 @@ class CropMapServiceTest {
 
     @Test
     void delete() {
-        cropMapService.delete(cropMapService.findById(id));
+        cropMapService.delete(cropMapService.findById(id).get());
         assertEquals(0, cropMapService.findAll().size());
     }
 
@@ -60,11 +60,11 @@ class CropMapServiceTest {
 
     @Test
     void findByName() {
-        assertEquals(name,cropMapService.findByName(name).getName());
+        assertEquals(name,cropMapService.findByName(name).get().getName());
     }
 
     @Test
     void findByVariety() {
-        assertEquals(variety,cropMapService.findByVariety(variety).getVariety());
+        assertEquals(variety,cropMapService.findByVariety(variety).get().getVariety());
     }
 }

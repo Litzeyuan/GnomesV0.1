@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -22,7 +23,7 @@ public class StageJPAService implements StageService {
     }
 
     @Override
-    public Stage findByName(String name) {
+    public Optional<Stage> findByName(String name) {
         log.debug("StageJPAService - findByName", name);
         return stageRepository.findByName(name);
     }
@@ -37,10 +38,10 @@ public class StageJPAService implements StageService {
     }
 
     @Override
-    public Stage findById(Long id) {
+    public Optional<Stage> findById(Long id) {
         log.debug("StageJPAService - findById", id);
 
-        return stageRepository.findById(id).orElse(null);
+        return stageRepository.findById(id);
     }
 
     @Override

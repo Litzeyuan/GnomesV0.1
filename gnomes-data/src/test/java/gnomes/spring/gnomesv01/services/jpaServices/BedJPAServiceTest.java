@@ -12,7 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -38,8 +39,8 @@ class BedJPAServiceTest {
 
     @Test
     void findByName() {
-        when(bedRepository.findByName(any())).thenReturn(bed);
-        Bed bed1 = bedRepository.findByName(name);
+        when(bedRepository.findByName(any())).thenReturn(Optional.of(bed));
+        Bed bed1 = bedRepository.findByName(name).get();
 
         assertEquals(bed, bed1);
         assertEquals(name, bed1.getName());
@@ -61,7 +62,7 @@ class BedJPAServiceTest {
     @Test
     void findById() {
         when(bedRepository.findById(anyLong())).thenReturn(Optional.of(bed));
-        assertEquals(bed, bedJPAService.findById(id));
+        assertEquals(bed, bedJPAService.findById(id).get());
         verify(bedRepository, times(1)).findById(anyLong());
     }
 
@@ -75,14 +76,14 @@ class BedJPAServiceTest {
     @Test
     void delete() {
         bedJPAService.delete(bed);
-        assertNull(bedJPAService.findById(id));
+        assertEquals(Optional.empty(),bedJPAService.findById(id));
         verify(bedRepository,times(1)).delete(any());
     }
 
     @Test
     void deleteById() {
         bedJPAService.deleteById(id);
-        assertNull(bedJPAService.findById(id));
+        assertEquals(Optional.empty(),bedJPAService.findById(id));
         verify(bedRepository,times(1)).deleteById(anyLong());
     }
 

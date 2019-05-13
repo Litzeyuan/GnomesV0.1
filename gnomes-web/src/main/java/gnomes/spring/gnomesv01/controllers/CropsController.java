@@ -1,9 +1,9 @@
 package gnomes.spring.gnomesv01.controllers;
 
-import gnomes.spring.gnomesv01.models.Crop;
 import gnomes.spring.gnomesv01.services.interfaces.CropService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -24,9 +24,9 @@ public class CropsController {
         return "crops";
     }
 
-    @RequestMapping("/find")
-    public String findCrops(Model model){
-        model.addAttribute("owner", Crop.builder().build());
-        return "listCrops/find";
+    @RequestMapping("/listCrops/find/{id}")
+    public String findCropsById(@PathVariable String id, Model model){
+        model.addAttribute("crop", cropService.findById(new Long(id)));
+        return "crops/find";
     }
 }

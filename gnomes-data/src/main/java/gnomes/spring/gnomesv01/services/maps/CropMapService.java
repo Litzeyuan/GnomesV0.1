@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Profile("maps")
@@ -17,7 +18,7 @@ public class CropMapService extends AbstractMapService<Crop, Long> implements Cr
     }
 
     @Override
-    public Crop findById(Long id) {
+    public Optional<Crop> findById(Long id) {
         return super.findById(id);
     }
 
@@ -42,20 +43,18 @@ public class CropMapService extends AbstractMapService<Crop, Long> implements Cr
     }
 
     @Override
-    public Crop findByName(String name) {
+    public Optional<Crop> findByName(String name) {
         return this.findAll()
                 .stream()
                 .filter(crop -> crop.getName().equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 
     @Override
-    public Crop findByVariety(String variety) {
+    public Optional<Crop> findByVariety(String variety) {
         return this.findAll()
                 .stream()
                 .filter(crop -> crop.getVariety().equalsIgnoreCase(variety))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }

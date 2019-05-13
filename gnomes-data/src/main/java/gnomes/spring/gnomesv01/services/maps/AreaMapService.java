@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Profile("maps")
@@ -17,7 +18,7 @@ public class AreaMapService extends AbstractMapService<Area, Long> implements Ar
     }
 
     @Override
-    public Area findById(Long id) {
+    public Optional<Area> findById(Long id) {
         return super.findById(id);
     }
 
@@ -42,11 +43,10 @@ public class AreaMapService extends AbstractMapService<Area, Long> implements Ar
     }
 
     @Override
-    public Area findByName(String name) {
+    public Optional<Area> findByName(String name) {
         return this.findAll()
                 .stream()
                 .filter(area -> area.getName().equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }

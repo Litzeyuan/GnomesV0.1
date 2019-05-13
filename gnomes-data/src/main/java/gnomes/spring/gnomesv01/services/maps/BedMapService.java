@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Profile("maps")
@@ -16,7 +17,7 @@ public class BedMapService extends AbstractMapService<Bed, Long> implements BedS
     }
 
     @Override
-    public Bed findById(Long id) {
+    public Optional<Bed> findById(Long id) {
         return super.findById(id);
     }
 
@@ -42,11 +43,10 @@ public class BedMapService extends AbstractMapService<Bed, Long> implements BedS
 
 
     @Override
-    public Bed findByName(String name) {
+    public Optional<Bed> findByName(String name) {
         return this.findAll()
                 .stream()
                 .filter(bed -> bed.getName().equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }

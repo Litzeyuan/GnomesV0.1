@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -79,14 +80,17 @@ class CropsControllerTest {
 
         List<Crop> crops1 = argumentCaptor.getValue();
         assertEquals(2,crops1.size());
-
     }
 
     @Test
-    void findCropsTest() throws Exception {
-        mockMvc.perform(get("/find"))
+    void findCropsByIdTest() throws Exception {
+        Crop crop = Crop.builder().id(id1).build();
+
+        when(cropService.findById(id1)).thenReturn(Optional.of(crop));
+
+        mockMvc.perform(get("/listCrops/find/1"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("listCrops/find"));
+                .andExpect(view().name("crops/find"));
 
         verifyZeroInteractions(cropService);
 

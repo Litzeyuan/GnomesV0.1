@@ -29,7 +29,7 @@ class StageMapServiceTest {
 
     @Test
     void findById() {
-        assertEquals(id,stageMapService.findById(id).getId());
+        assertEquals(id,stageMapService.findById(id).get().getId());
     }
 
     @Test
@@ -46,7 +46,7 @@ class StageMapServiceTest {
 
     @Test
     void delete() {
-        stageMapService.delete(stageMapService.findById(id));
+        stageMapService.delete(stageMapService.findById(id).get());
         assertEquals(0, stageMapService.findAll().size());
     }
 
@@ -58,6 +58,6 @@ class StageMapServiceTest {
 
     @Test
     void findByName() {
-        assertEquals(name,stageMapService.findByName(name).getName());
+        assertEquals(name,stageMapService.findByName(name).get().getName());
     }
 }

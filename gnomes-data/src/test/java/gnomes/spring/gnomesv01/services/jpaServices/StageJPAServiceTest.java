@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -38,8 +39,8 @@ class StageJPAServiceTest {
 
     @Test
     void findByName() {
-        when(stageRepository.findByName(any())).thenReturn(stage);
-        Stage stage1 = stageJPAService.findByName(name);
+        when(stageRepository.findByName(any())).thenReturn(Optional.of(stage));
+        Stage stage1 = stageJPAService.findByName(name).get();
 
         assertEquals(stage, stage1);
         assertEquals(name, stage1.getName());
@@ -64,7 +65,7 @@ class StageJPAServiceTest {
     @Test
     void findById() {
         when(stageRepository.findById(anyLong())).thenReturn(Optional.of(stage));
-        assertEquals(id,stageJPAService.findById(id).getId());
+        assertEquals(id,stageJPAService.findById(id).get().getId());
         verify(stageRepository, times(1)).findById(id);
     }
 
@@ -77,14 +78,14 @@ class StageJPAServiceTest {
     @Test
     void delete() {
         stageJPAService.delete(stage);
-        assertNull(stageJPAService.findById(id));
+        assertEquals(Optional.empty(), stageJPAService.findById(id));
         verify(stageRepository).delete(any());
     }
 
     @Test
     void deleteById() {
         stageJPAService.deleteById(id);
-        assertNull(stageJPAService.findById(id));
+        assertEquals(Optional.empty(), stageJPAService.findById(id));
         verify(stageRepository).deleteById(anyLong());
     }
 

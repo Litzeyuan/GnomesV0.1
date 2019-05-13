@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Profile("maps")
@@ -16,7 +17,7 @@ public class StageMapService extends AbstractMapService<Stage,Long> implements S
     }
 
     @Override
-    public Stage findById(Long id) {
+    public Optional<Stage> findById(Long id) {
         return super.findById(id);
     }
 
@@ -41,11 +42,10 @@ public class StageMapService extends AbstractMapService<Stage,Long> implements S
     }
 
     @Override
-    public Stage findByName(String name) {
+    public Optional<Stage> findByName(String name) {
         return this.findAll()
                 .stream()
                 .filter(stage -> stage.getName().equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }

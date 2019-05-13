@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Profile("maps")
@@ -16,7 +17,7 @@ public class LocationMapService extends AbstractMapService<Location, Long> imple
     }
 
     @Override
-    public Location findById(Long id) {
+    public Optional<Location> findById(Long id) {
         return super.findById(id);
     }
 
@@ -41,11 +42,10 @@ public class LocationMapService extends AbstractMapService<Location, Long> imple
     }
 
     @Override
-    public Location findByName(String name) {
+    public Optional<Location> findByName(String name) {
         return this.findAll()
                 .stream()
                 .filter(location -> location.getName().equalsIgnoreCase(name))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
     }
 }

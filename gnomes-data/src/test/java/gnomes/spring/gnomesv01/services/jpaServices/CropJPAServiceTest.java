@@ -12,7 +12,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -40,8 +41,8 @@ class CropJPAServiceTest {
 
     @Test
     void findByName() {
-        when(cropRepository.findByName(any())).thenReturn(crop);
-        Crop crop1 = cropRepository.findByName(name);
+        when(cropRepository.findByName(any())).thenReturn(Optional.of(crop));
+        Crop crop1 = cropRepository.findByName(name).get();
 
         assertEquals(crop, crop1);
         assertEquals(name, crop1.getName());
@@ -50,8 +51,8 @@ class CropJPAServiceTest {
 
     @Test
     void findByVariety() {
-        when(cropRepository.findByVariety(any())).thenReturn(crop);
-        Crop crop1 = cropRepository.findByVariety(variety);
+        when(cropRepository.findByVariety(any())).thenReturn(Optional.of(crop));
+        Crop crop1 = cropRepository.findByVariety(variety).get();
 
         assertEquals(crop, crop1);
         assertEquals(variety, crop1.getVariety());
@@ -73,7 +74,7 @@ class CropJPAServiceTest {
     @Test
     void findById() {
         when(cropRepository.findById(anyLong())).thenReturn(Optional.of(crop));
-        assertEquals(crop, cropJPAService.findById(id));
+        assertEquals(crop, cropJPAService.findById(id).get());
         verify(cropRepository, times(1)).findById(anyLong());
     }
 
@@ -87,14 +88,14 @@ class CropJPAServiceTest {
     @Test
     void delete() {
         cropJPAService.delete(crop);
-        assertNull(cropJPAService.findById(id));
+        assertEquals(Optional.empty(),cropJPAService.findById(id));
         verify(cropRepository,times(1)).delete(any());
     }
 
     @Test
     void deleteById() {
         cropJPAService.deleteById(id);
-        assertNull(cropJPAService.findById(id));
+        assertEquals(Optional.empty(),cropJPAService.findById(id));
         verify(cropRepository,times(1)).deleteById(anyLong());
     }
 

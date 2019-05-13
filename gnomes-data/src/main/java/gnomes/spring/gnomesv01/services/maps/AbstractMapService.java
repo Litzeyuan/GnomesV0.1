@@ -14,8 +14,8 @@ public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> 
         return new ArrayList<>(map.values());
     }
 
-    T findById(Long id){
-      return map.get(id);
+    Optional<T> findById(Long id){
+      return Optional.of(map.get(id));
     }
 
     T save(T object){

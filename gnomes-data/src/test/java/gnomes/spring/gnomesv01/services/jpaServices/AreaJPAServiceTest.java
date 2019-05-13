@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,8 +38,8 @@ class AreaJPAServiceTest {
 
     @Test
     void findByName() {
-        when(areaRepository.findByName(any())).thenReturn(area);
-        Area area1 = areaJPAService.findByName(name);
+        when(areaRepository.findByName(any())).thenReturn(Optional.of(area));
+        Area area1 = areaJPAService.findByName(name).get();
 
         assertEquals(area, area1);
         assertEquals(name, area1.getName());
@@ -63,7 +64,7 @@ class AreaJPAServiceTest {
     @Test
     void findById() {
         when(areaRepository.findById(anyLong())).thenReturn(Optional.of(area));
-        assertEquals(id,areaJPAService.findById(id).getId());
+        assertEquals(id,areaJPAService.findById(id).get().getId());
         verify(areaRepository, times(1)).findById(id);
     }
 
@@ -76,14 +77,14 @@ class AreaJPAServiceTest {
     @Test
     void delete() {
         areaJPAService.delete(area);
-        assertNull(areaJPAService.findById(id));
+        assertEquals(Optional.empty(),areaJPAService.findById(id));
         verify(areaRepository).delete(any());
     }
 
     @Test
     void deleteById() {
         areaJPAService.deleteById(id);
-        assertNull(areaJPAService.findById(id));
+        assertEquals(Optional.empty(),areaJPAService.findById(id));
         verify(areaRepository).deleteById(anyLong());
     }
 
