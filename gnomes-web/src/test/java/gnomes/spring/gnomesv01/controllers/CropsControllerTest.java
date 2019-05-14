@@ -90,7 +90,8 @@ class CropsControllerTest {
 
         mockMvc.perform(get("/listCrops/find/1"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("crops/find"));
+                .andExpect(view().name("crops/find"))
+                .andExpect(model().attributeExists("crop"));
 
         verifyZeroInteractions(cropService);
 
