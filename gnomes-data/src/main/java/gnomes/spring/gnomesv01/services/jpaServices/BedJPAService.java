@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 @Profile({"default","jpaServices"})
 public class BedJPAService implements BedService {
+
     private BedRepository bedRepository;
     private CropRepository cropRepository;
 

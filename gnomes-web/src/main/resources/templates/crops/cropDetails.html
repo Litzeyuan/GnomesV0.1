@@ -22,7 +22,8 @@
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h1 class="panel-title" th:text="${crop.get().name}"></h1>
+                        <h1 class="panel-title" th:text="${crop.name}"></h1>
+                        <a class="btn btn-md btn-secondary display-4" th:href="newCrop">Edit</a>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -30,13 +31,13 @@
                                 <h5>Variety</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${crop.get().variety}">date</p>
+                                <p th:text="${crop.variety}">date</p>
                             </div>
                             <div class="col-md-3">
                                 <h5>Sown Date</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${crop.get().stages.isEmpty()}"></p>
+                                <p th:text="${crop.stages.isEmpty()}"></p>
                             </div>
                         </div>
                         <div class="row">
@@ -44,13 +45,13 @@
                                 <h5>Seed Vender</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${crop.get().seedVender}"></p>
+                                <p th:text="${crop.seedVender}"></p>
                             </div>
                             <div class="col-md-3">
                                 <h5>Seed Bought Date</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${crop.get().seedBoughtDate}"></p>
+                                <p th:text="${crop.seedBoughtDate}"></p>
                             </div>
                         </div>
                         <div class="row">
@@ -58,13 +59,13 @@
                                 <h5>Sowing Type</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${crop.get().sowingType}"></p>
+                                <p th:text="${crop.sowingType}"></p>
                             </div>
                             <div class="col-md-3">
                                 <h5>Compost Used</h5>
                             </div>
                             <div class="col-md-3">
-                                <p th:text="${crop.get().compostUsed}"></p>
+                                <p th:text="${crop.compostUsed}"></p>
                             </div>
                         </div>
 
@@ -80,7 +81,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <ul>
-                                    <li th:each="stage: ${crop.get().stages}"
+                                    <li th:each="stage: ${crop.stages}"
                                         th:text="${stage.id}"></li>
                                 </ul>
                             </div>
@@ -96,7 +97,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <p th:text="${crop.get().notes}">some notes</p>
+                                <p th:text="${crop.notes}">some notes</p>
                             </div>
                         </div>
                     </div>

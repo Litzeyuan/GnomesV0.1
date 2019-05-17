@@ -16,6 +16,7 @@ import java.util.Optional;
 @Service
 @Profile({"default","jpaServices"})
 public class AreaJPAService implements AreaService {
+
     private AreaRepository areaRepository;
     private BedRepository bedRepository;
 

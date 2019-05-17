@@ -39,7 +39,8 @@
                                 </thead>
                                 <tr th:each="crop : ${crops}">
                                     <td>date</td>
-                                    <td><a href="#" th:text="${crop.name}" th:href="@{'/listCrops/find/' + ${crop.id}}"></a></td>
+<!--                                    <td><a href="#" th:text="${crop.name}" th:href="@{'/listCrops/find/' + ${crop.id}}"></a></td>-->
+                                    <td><a href="#" th:text="${crop.name}" th:href="@{'/listCrops/' + ${crop.id}}"></a></td>
                                     <td th:text="${crop.currentStage}"></td>
                                     <td th:text="${crop.notes}"></td>
                                 </tr>
@@ -51,6 +52,12 @@
         </div>
     </div>
 </table>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <a class="btn btn-md btn-secondary display-4" th:href="newCrop">Add a crop</a>
+    </div>
+</div>
 
 </body>
 </html>

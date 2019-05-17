@@ -17,9 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -86,14 +87,41 @@ class CropsControllerTest {
     void findCropsByIdTest() throws Exception {
         Crop crop = Crop.builder().id(id1).build();
 
-        when(cropService.findById(id1)).thenReturn(Optional.of(crop));
+        when(cropService.findById(anyLong())).thenReturn(Optional.of(crop));
 
         mockMvc.perform(get("/listCrops/find/1"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("crops/find"))
+                .andExpect(view().name("crops/cropDetails"))
                 .andExpect(model().attributeExists("crop"));
 
         verifyZeroInteractions(cropService);
+    }
 
+    @Test
+    void showCropTest() throws Exception{
+        Crop crop = Crop.builder().id(id1).build();
+
+        when(cropService.findById(anyLong())).thenReturn(Optional.of(crop));
+        mockMvc.perform(get("/listCrops/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("crops/cropDetails"))
+                .andExpect(model().attribute("crop", hasProperty("id",is(id1))));
+    }
+
+
+    @Test
+    void addNewCropTest() throws  Exception{
+        Crop crop = Crop.builder().id(id1).build();
+
+        when(cropService.save(any())).thenReturn(crop);
+        mockMvc.perform(get("/newCrop"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("crops/cropform"))
+                .andExpect(model().attributeExists("crop"));
+    }
+
+    @Test
+    void saveOrUpdateTest() throws  Exception{
+        Crop crop = Crop.builder().id(id1).build();
     }
 }
