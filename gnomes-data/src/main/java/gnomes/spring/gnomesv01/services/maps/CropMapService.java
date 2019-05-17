@@ -57,4 +57,14 @@ public class CropMapService extends AbstractMapService<Crop, Long> implements Cr
                 .filter(crop -> crop.getVariety().equalsIgnoreCase(variety))
                 .findFirst();
     }
+
+    @Override
+    public List<Crop> findAllByNameLike(String name) {
+        return null;
+    }
+
+    @Override
+    public List<Crop> findAllByVarietyLike(String variety) {
+        return null;
+    }
 }

@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,19 +84,7 @@ class CropsControllerTest {
         assertEquals(2,crops1.size());
     }
 
-    @Test
-    void findCropsByIdTest() throws Exception {
-        Crop crop = Crop.builder().id(id1).build();
 
-        when(cropService.findById(anyLong())).thenReturn(Optional.of(crop));
-
-        mockMvc.perform(get("/listCrops/find/1"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("crops/cropDetails"))
-                .andExpect(model().attributeExists("crop"));
-
-        verifyZeroInteractions(cropService);
-    }
 
     @Test
     void showCropTest() throws Exception{
@@ -108,8 +97,56 @@ class CropsControllerTest {
                 .andExpect(model().attribute("crop", hasProperty("id",is(id1))));
     }
 
+    @Test
+    void findCropsTest() throws Exception {
+        mockMvc.perform(get("/crops/find"))
+                 .andExpect(status().isOk())
+                .andExpect(view().name("crops/findCrops"))
+                .andExpect(model().attributeExists("crop"));
+
+        verifyZeroInteractions(cropService);
+    }
 
     @Test
+    void findAllByNameLikeTest() throws Exception{
+        Crop crop1 = Crop.builder().id(id1).build();
+        Crop crop2 = Crop.builder().id(id2).build();
+
+        when(cropService.findAllByNameLike(anyString())).thenReturn(Arrays.asList(crop1,crop2));
+
+        mockMvc.perform(get("/crops"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("crops/cropsList"))
+                .andExpect(model().attribute("results" ,hasSize(2)));
+    }
+
+    @Test
+    void findAllByNameLikeTestReturnOne() throws Exception{
+        Crop crop1 = Crop.builder().id(id1).build();
+
+        when(cropService.findAllByNameLike(anyString())).thenReturn(Arrays.asList(crop1));
+
+        mockMvc.perform(get("/crops"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/listCrops/1"));
+    }
+
+
+
+//    @Test
+    void findAllByVarietyLikeTest() throws Exception{
+        Crop crop1 = Crop.builder().id(id1).build();
+        Crop crop2 = Crop.builder().id(id2).build();
+
+        when(cropService.findAllByVarietyLike(anyString())).thenReturn(Arrays.asList(crop1,crop2));
+
+        mockMvc.perform(get("/crops"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("crops/cropsVarietyLikeList"))
+                .andExpect(model().attribute("crops" ,hasSize(2)));
+    }
+
+//    @Test
     void addNewCropTest() throws  Exception{
         Crop crop = Crop.builder().id(id1).build();
 
@@ -120,7 +157,7 @@ class CropsControllerTest {
                 .andExpect(model().attributeExists("crop"));
     }
 
-    @Test
+//    @Test
     void saveOrUpdateTest() throws  Exception{
         Crop crop = Crop.builder().id(id1).build();
     }

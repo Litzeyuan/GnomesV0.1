@@ -1,13 +1,15 @@
 package gnomes.spring.gnomesv01.controllers;
 
+import gnomes.spring.gnomesv01.models.Crop;
 import gnomes.spring.gnomesv01.services.interfaces.CropService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class CropsController {
@@ -19,6 +21,11 @@ public class CropsController {
     }
 
 
+    @InitBinder
+    public void setAllowedFields(WebDataBinder dataBinder){
+        dataBinder.setDisallowedFields("id");
+    }
+
 //    @RequestMapping({"/listCrops", "crops.html"})
     @RequestMapping("/listCrops")
     public String listCrops(Model model){
@@ -27,25 +34,50 @@ public class CropsController {
         return "crops";
     }
 
-    // 1st way to show a crop
-    @RequestMapping("/listCrops/find/{id}")
-    public String findCropsById(@PathVariable String id, Model model){
-        model.addAttribute("crop", cropService.findById(new Long(id)).get());
-        return "crops/cropDetails";
-    }
 
-    // 2nd way to show a crop
     @GetMapping("/listCrops/{cropId}")
     public ModelAndView showCrop(@PathVariable("cropId") Long cropId){
+
         ModelAndView mv = new ModelAndView("crops/cropDetails");
         mv.addObject(cropService.findById(cropId).get());
+
+        // 2nd way to show a crop, pass in Model and id, then return template name
+        //model.addAttribute("crop", cropService.findById(new Long(id)).get());
+        //return "crops/cropDetails";
+
         return mv;
+    }
+
+    @RequestMapping("/crops/find")
+    public String findCrops(Model model){
+        model.addAttribute("crop", Crop.builder().build());
+        return "crops/findCrops";
+    }
+
+    @GetMapping("/crops")
+    public String processFindForm(Crop crop, BindingResult result, Model model){
+        //empty string signifies broadest possible search
+        if(crop.getName() == null)
+            crop.setName("");
+
+        //find by name
+        List<Crop> results = cropService.findAllByNameLike("%" + crop.getName() + "%");
+        if(results.isEmpty()){
+            result.rejectValue("name", "notFound", "not found");
+            return "crops/findCrops";
+        }
+        //else if(results.size() == 1)
+        //    return  "redirect:/listCrops/" + results.get(0).getId();
+        else {
+            model.addAttribute("results", results);
+            return "crops/findCrops";
+        }
     }
 
     @RequestMapping("/newCrop")
     public String addNewCrop(Model model){
 //        model.addAttribute("crop",);
-        return "crops/cropform";
+        return "cropForm";
     }
 
     @PostMapping

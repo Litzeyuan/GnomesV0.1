@@ -36,6 +36,16 @@ public class CropJPAService implements CropService {
     }
 
     @Override
+    public List<Crop> findAllByNameLike(String name) {
+        return cropRepository.findAllByNameLike(name);
+    }
+
+    @Override
+    public List<Crop> findAllByVarietyLike(String variety) {
+        return cropRepository.findAllByVarietyLike(variety);
+    }
+
+    @Override
     public List<Crop> findAll() {
         List<Crop> crops = new ArrayList<>();
         cropRepository.findAll().forEach(crops::add);
