@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,9 +22,9 @@ import java.util.Optional;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -57,17 +58,11 @@ class CropsControllerTest {
                 .build();
     }
 
-    @Test
-    void mockMVCTest() throws Exception {
-        mockMvc.perform(get("/listCrops"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("crops"));
-    }
 
     @Test
     void listCropsTest() throws Exception{
         when(cropService.findAll()).thenReturn(crops);
-        mockMvc.perform(get("/listCrops"))
+        mockMvc.perform(get("/crops/all"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("crops"))
                 .andExpect(model().attribute("crops",hasSize(2))); // added 2 in the array list in the setUp()
@@ -91,7 +86,7 @@ class CropsControllerTest {
         Crop crop = Crop.builder().id(id1).build();
 
         when(cropService.findById(anyLong())).thenReturn(Optional.of(crop));
-        mockMvc.perform(get("/listCrops/1"))
+        mockMvc.perform(get("/crops/1"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("crops/cropDetails"))
                 .andExpect(model().attribute("crop", hasProperty("id",is(id1))));
@@ -116,7 +111,7 @@ class CropsControllerTest {
 
         mockMvc.perform(get("/crops"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("crops/cropsList"))
+                .andExpect(view().name("crops/findCrops"))
                 .andExpect(model().attribute("results" ,hasSize(2)));
     }
 
@@ -127,8 +122,9 @@ class CropsControllerTest {
         when(cropService.findAllByNameLike(anyString())).thenReturn(Arrays.asList(crop1));
 
         mockMvc.perform(get("/crops"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/listCrops/1"));
+                .andExpect(status().isOk())
+                .andExpect(view().name("crops/findCrops"))
+                .andExpect(model().attribute("results" ,hasSize(1)));
     }
 
 
@@ -142,23 +138,53 @@ class CropsControllerTest {
 
         mockMvc.perform(get("/crops"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("crops/cropsVarietyLikeList"))
+                .andExpect(view().name("crops/cropsList"))
                 .andExpect(model().attribute("crops" ,hasSize(2)));
     }
 
-//    @Test
-    void addNewCropTest() throws  Exception{
-        Crop crop = Crop.builder().id(id1).build();
 
-        when(cropService.save(any())).thenReturn(crop);
-        mockMvc.perform(get("/newCrop"))
+    @Test
+    void initCreationFormTest() throws Exception{
+        mockMvc.perform(get("/crops/new"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("crops/cropform"))
+                .andExpect(view().name("crops/cropForm"))
                 .andExpect(model().attributeExists("crop"));
+
+        verifyZeroInteractions(cropService);
     }
 
-//    @Test
-    void saveOrUpdateTest() throws  Exception{
-        Crop crop = Crop.builder().id(id1).build();
+    @Test
+    void processCreationFormTest() throws Exception{
+        when(cropService.save(ArgumentMatchers.any())).thenReturn(Crop.builder().id(id1).build());
+
+        mockMvc.perform(post("/crops/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("crops/1"))
+                .andExpect(model().attributeExists("crop"));
+
+        verify(cropService).save(ArgumentMatchers.any());
+    }
+
+    @Test
+    void initEditFormTest() throws Exception{
+        when(cropService.findById(anyLong())).thenReturn(Optional.of(Crop.builder().id(id1).build()));
+        mockMvc.perform(get("/crops/1/edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("crops/cropForm"))
+                .andExpect(model().attributeExists("crop"));
+
+        verifyZeroInteractions(cropService);
+    }
+
+    @Test
+    void processEditFormTest() throws Exception{
+        when(cropService.save(ArgumentMatchers.any())).thenReturn(Crop.builder().id(id1).build());
+
+        mockMvc.perform(post("/crops/1/edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("crops/1"))
+                .andExpect(model().attributeExists("crop"));
+
+        verify(cropService).save(ArgumentMatchers.any());
     }
 }

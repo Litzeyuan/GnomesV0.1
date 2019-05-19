@@ -14,7 +14,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-
+<h1>Gnomes Helper - Crops Summary</h1>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <a class="btn btn-md btn-secondary display-4" th:href="new">Add a crop</a>
+        <a class="btn btn-md btn-secondary display-4" th:href="find">Search</a>
+    </div>
+</div>
 <table>
     <div class="container-fluid" style="margin-top: 20px">
         <div class="row">
@@ -22,7 +28,6 @@
             <div class="col-md-6 col-md-offset-3">
 <!--                <div class="header">-->
 <!--                    <div class="header-panel">-->
-                    <h1>Gnomes Helper - Crops Summary</h1>
 <!--                    </div>-->
                     <div class="header-panel">
 <!--                        won't display the table if the crops are empty -->
@@ -39,8 +44,7 @@
                                 </thead>
                                 <tr th:each="crop : ${crops}">
                                     <td>date</td>
-<!--                                    <td><a href="#" th:text="${crop.name}" th:href="@{'/listCrops/find/' + ${crop.id}}"></a></td>-->
-                                    <td><a href="#" th:text="${crop.name}" th:href="@{'/listCrops/' + ${crop.id}}"></a></td>
+                                    <td><a href="#" th:text="${crop.name}" th:href="@{'/crops/' + ${crop.id}}"></a></td>
                                     <td th:text="${crop.currentStage}"></td>
                                     <td th:text="${crop.notes}"></td>
                                 </tr>
@@ -53,12 +57,7 @@
     </div>
 </table>
 
-<div class="container-fluid" style="margin-top: 20px">
-    <div class="row">
-        <a class="btn btn-md btn-secondary display-4" th:href="newCrop">Add a crop</a>
-        <a class="btn btn-md btn-secondary display-4" th:href="@{'crops/find'}">Search</a>
-    </div>
-</div>
+
 
 </body>
 </html>

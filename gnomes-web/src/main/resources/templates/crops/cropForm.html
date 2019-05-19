@@ -14,20 +14,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h2>Crops Found</h2>
-    <table class="table table-striped">
-        <thead>
-
-        </thead>
-        <tbody>
-            <tr th:each="crop:${results}">
-                <td>
-                    <a th:href="@{/listCrops/__${crop.id}__}" th:text="${crop.name}"></a>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-
+<h2 th:object="${crop}" th:with="text=${crop.id == null} ? 'Add Crop' : 'Edit Crop'" th:text="${text}"></h2>
+<form th:object="${crop}" class="form-horizontal" id="corp-form" method="post">
+    <div class="form-group has-feedback">
+<!--        <input th:replace="~{fragments/inputField :: input ('First Name', 'firstName', 'text')}" />-->
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-md btn-secondary display-4" type="submit">Confirm</button>
+        </div>
+    </div>
+</form>
 </body>
 </html>
