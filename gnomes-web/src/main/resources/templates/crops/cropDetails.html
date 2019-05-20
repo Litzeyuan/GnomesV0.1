@@ -23,7 +23,8 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h1 class="panel-title" th:text="${crop.name}"></h1>
-                        <a class="btn btn-md btn-secondary display-4" th:href="@{/crops/__${crop.id}__/edit}">Edit</a>
+                        <a class="btn btn-primary" th:href="@{/crops/__${crop.id}__/edit}">Edit</a>
+                        <a class="btn btn-primary" href="#" th:href="@{/crops/all}" role="button">Back</a>
                     </div>
                     <div class="panel-body">
                         <div class="row">

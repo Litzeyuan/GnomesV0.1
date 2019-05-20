@@ -57,7 +57,7 @@ public class CropJPAService implements CropService {
         Optional<Crop> crop = cropRepository.findById(id);
 
         if (!crop.isPresent())
-            throw new RuntimeException("Crop not found");
+            throw new RuntimeException("Crop Not Found");
 
         return  crop;
 

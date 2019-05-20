@@ -158,8 +158,8 @@ class CropsControllerTest {
         when(cropService.save(ArgumentMatchers.any())).thenReturn(Crop.builder().id(id1).build());
 
         mockMvc.perform(post("/crops/new"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("crops/1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/crops/1"))
                 .andExpect(model().attributeExists("crop"));
 
         verify(cropService).save(ArgumentMatchers.any());
@@ -181,8 +181,8 @@ class CropsControllerTest {
         when(cropService.save(ArgumentMatchers.any())).thenReturn(Crop.builder().id(id1).build());
 
         mockMvc.perform(post("/crops/1/edit"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("crops/1"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/crops/1"))
                 .andExpect(model().attributeExists("crop"));
 
         verify(cropService).save(ArgumentMatchers.any());

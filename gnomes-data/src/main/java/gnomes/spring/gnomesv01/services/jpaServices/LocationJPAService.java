@@ -39,7 +39,12 @@ public class LocationJPAService implements LocationService {
 
     @Override
     public Optional<Location> findById(Long id) {
-        return locationRepository.findById(id);
+        Optional<Location> location = locationRepository.findById(id);
+
+        if (!location.isPresent())
+            throw new RuntimeException("Location Not Found");
+
+        return  location;
     }
 
     @Override

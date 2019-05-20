@@ -13,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -78,14 +77,14 @@ class StageJPAServiceTest {
     @Test
     void delete() {
         stageJPAService.delete(stage);
-        assertEquals(Optional.empty(), stageJPAService.findById(id));
+        assertThrows(RuntimeException.class, () -> stageJPAService.findById(id));
         verify(stageRepository).delete(any());
     }
 
     @Test
     void deleteById() {
         stageJPAService.deleteById(id);
-        assertEquals(Optional.empty(), stageJPAService.findById(id));
+        assertThrows(RuntimeException.class, () -> stageJPAService.findById(id));
         verify(stageRepository).deleteById(anyLong());
     }
 

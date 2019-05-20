@@ -45,7 +45,12 @@ public class BedJPAService implements BedService {
     public Optional<Bed> findById(Long id) {
         log.debug("BedJPAService - findById", id);
 
-        return bedRepository.findById(id);
+        Optional<Bed> bed = bedRepository.findById(id);
+
+        if (!bed.isPresent())
+            throw new RuntimeException("Bed Not Found");
+
+        return bed;
     }
 
     @Override

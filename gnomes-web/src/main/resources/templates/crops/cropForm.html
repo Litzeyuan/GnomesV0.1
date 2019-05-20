@@ -14,16 +14,44 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-<h2 th:object="${crop}" th:with="text=${crop.id == null} ? 'Add Crop' : 'Edit Crop'" th:text="${text}"></h2>
-<form th:object="${crop}" class="form-horizontal" id="corp-form" method="post">
-    <div class="form-group has-feedback">
-<!--        <input th:replace="~{fragments/inputField :: input ('First Name', 'firstName', 'text')}" />-->
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-md btn-secondary display-4" type="submit">Confirm</button>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1 class="panel-title" th:object="${crop}" th:with="text=${crop.id == null} ? 'Add Crop' : 'Edit ' + ${crop.name}" th:text="${text}"></h1>
+            <form th:object="${crop}" class="form-horizontal" id="corp-form" method="post">
+                <div class="form-group has-feedback">
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Basic Info</h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Name:</label>
+                                    <input type="text" class="form-control" th:field="*{name}"/>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Variety:</label>
+                                    <input type="text" class="form-control" th:field="*{variety}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-primary" type="submit">Confirm</button>
+                        <a class="btn btn-primary" href="#" th:href="@{/crops/all}" role="button">Cancel</a>
+                    </div>
+                </div>
+            </form>
+
         </div>
     </div>
-</form>
+</div>
 </body>
 </html>

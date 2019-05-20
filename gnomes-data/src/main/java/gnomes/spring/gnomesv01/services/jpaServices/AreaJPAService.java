@@ -44,8 +44,12 @@ public class AreaJPAService implements AreaService {
     @Override
     public Optional<Area> findById(Long id) {
         log.debug("AreaJPAService - findById", id);
+        Optional<Area> area= areaRepository.findById(id);
 
-        return areaRepository.findById(id);
+        if (!area.isPresent())
+            throw new RuntimeException("Area Not Found");
+
+        return area;
     }
 
     @Override

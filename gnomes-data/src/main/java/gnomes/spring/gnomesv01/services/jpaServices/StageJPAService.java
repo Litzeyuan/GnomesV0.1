@@ -39,9 +39,12 @@ public class StageJPAService implements StageService {
 
     @Override
     public Optional<Stage> findById(Long id) {
-        log.debug("StageJPAService - findById", id);
+        Optional<Stage> stage = stageRepository.findById(id);
 
-        return stageRepository.findById(id);
+        if (!stage.isPresent())
+            throw new RuntimeException("Stage Not Found");
+
+        return  stage;
     }
 
     @Override

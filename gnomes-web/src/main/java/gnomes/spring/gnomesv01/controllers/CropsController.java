@@ -87,7 +87,7 @@ public class CropsController {
         if(result.hasErrors())
             return result.getAllErrors().get(0).toString();
         else
-            return "crops/" + cropService.save(crop).getId();
+            return "redirect:/crops/" + cropService.save(crop).getId();
 
     }
 
@@ -105,7 +105,7 @@ public class CropsController {
         else {
             crop.setId(cropId);
             Crop savedCrop = cropService.save(crop);
-            return "crops/" + savedCrop.getId();
+            return "redirect:/crops/" + savedCrop.getId();
         }
     }
 
