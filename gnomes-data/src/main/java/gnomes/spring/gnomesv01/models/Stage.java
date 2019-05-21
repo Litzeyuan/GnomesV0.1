@@ -16,6 +16,13 @@ import java.time.LocalDate;
 @Table(name = "stages")
 public class Stage extends BaseEntity{
 
+    private final static String SOWING_STAGE_NURSERY = "Sowing - NS";
+    private final static String SOWING_STAGE_DIRECT = "Sowing - DS";
+    private final static String GERMINATION_STAGE_HD = "Germination - HD";
+    private final static String GERMINATION_STAGE_PT = "Germination - PT";
+    private final static String TRANSPLANT_STAGE = "Transplant - TR";
+    private final static String HARVEST_STAGE = "Harvest - HV";
+
     // Common fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

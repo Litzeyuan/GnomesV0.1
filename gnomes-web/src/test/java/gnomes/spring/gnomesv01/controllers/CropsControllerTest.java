@@ -22,6 +22,7 @@ import java.util.Optional;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -178,13 +179,13 @@ class CropsControllerTest {
 
     @Test
     void processEditFormTest() throws Exception{
-        when(cropService.save(ArgumentMatchers.any())).thenReturn(Crop.builder().id(id1).build());
+        when(cropService.save(any())).thenReturn(Crop.builder().id(id1).build());
 
         mockMvc.perform(post("/crops/1/edit"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/crops/1"))
                 .andExpect(model().attributeExists("crop"));
 
-        verify(cropService).save(ArgumentMatchers.any());
+        verify(cropService).save(any());
     }
 }

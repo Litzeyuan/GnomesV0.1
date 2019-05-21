@@ -1,18 +1,18 @@
 package gnomes.spring.gnomesv01.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @EqualsAndHashCode(exclude={"stages","beds"})
-@Builder
-@AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+//@AllArgsConstructor
 @Entity
 @Table(name = "crops")
 public class Crop extends BaseEntity{
@@ -30,15 +30,24 @@ public class Crop extends BaseEntity{
     @Lob
     private String notes;
 
-    public Crop(){};
-
-    public Crop(String name, String variety) {
+    @Builder
+    public Crop(Long id, String name, String variety, String sowingType, String seedVender, LocalDate seedBoughtDate, String compostUsed, String currentStage, String notes, List<Stage> stages, List<Bed> beds) {
+        this.id = id;
+//        super(id);
         this.name = name;
         this.variety = variety;
+        this.sowingType = sowingType;
+        this.seedVender = seedVender;
+        this.seedBoughtDate = seedBoughtDate;
+        this.compostUsed = compostUsed;
+        this.currentStage = currentStage;
+        this.notes = notes;
+        if(stages != null) this.stages = stages;
+        if(beds != null) this.beds = beds;
     }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy="crop")
-    private List<Stage> stages;
+    private List<Stage> stages = new ArrayList<>();
 
     //eager, load all at once
     @ManyToMany(fetch = FetchType.EAGER)
@@ -56,5 +65,22 @@ public class Crop extends BaseEntity{
     public void addStage(Stage stage){
         stage.setCrop(this);
         this.stages.add(stage);
+    }
+
+    public Stage getStage(String name){
+        return getStage(name);
+    }
+
+    //overloading helper method
+    public Stage getStage(String name, Boolean ignoreNew){
+        name = name.toLowerCase();
+        for(Stage stage: stages){
+            if(!ignoreNew || !stage.isNew()){
+                String compName = stage.getName().toLowerCase();
+                if(compName.equals(name))
+                    return stage;
+            }
+        }
+        return null;
     }
 }

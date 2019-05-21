@@ -1,6 +1,9 @@
 package gnomes.spring.gnomesv01.models;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +12,10 @@ import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @MappedSuperclass
 public class BaseEntity implements Serializable {
 
