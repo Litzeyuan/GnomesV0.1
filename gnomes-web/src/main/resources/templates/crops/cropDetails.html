@@ -23,8 +23,8 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h1 class="panel-title" th:text="${crop.name}"></h1>
-                        <a class="btn btn-primary" th:href="@{/crops/__${crop.id}__/edit}">Edit</a>
-                        <a class="btn btn-primary" href="#" th:href="@{/crops/all}" role="button">Back</a>
+                        <a class="btn btn-primary" th:href="@{{id}/edit(id=${crop.id})}">Edit</a>
+                        <a class="btn btn-primary" th:href="@{/crops/all}" role="button">Back</a>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -81,15 +81,26 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <ul>
-                                    <li th:each="stage: ${crop.stages}"
-                                        th:text="${stage.id}"></li>
+                                <a class="btn btn-primary" th:href="@{{id}/stages/new(id=${crop.id})}" role="button">Add</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <ul th:each="stage: ${crop.stages}">
+                                    <a th:href="@{{cropId}/stages/{stageId}/edit(cropId=${crop.id},stageId=${stage.id})}">Edit</a>
+                                    <td th:text="${stage.name}"></td>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
 
+
+<!--                <div class="col-md-12">-->
+<!--                    <ul>-->
+<!--                        <li th:each="stage: ${crop.stages}"  th:text="${stage.name}"></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">

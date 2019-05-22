@@ -54,36 +54,37 @@ public class StageController {
             && crop.getStage(stage.getName(), true) != null)
             result.rejectValue("name", "duplicate", "already exists");
 
-        crop.getStages().add(stage);
-
         if(result.hasErrors()) {
             modelMap.put("stage", stage);
             return result.getAllErrors().get(0).toString();
         }
         else {
+            stage.setCrop(crop);  //has to be there
             stageService.save(stage);
+//            cropService.save(crop);
             return "redirect:/crops/" + crop.getId();
         }
-
     }
 
     @GetMapping("/stages/{stageId}/edit")
-    public String initEditForm(@PathVariable Long stageId, Model model){
-        model.addAttribute("stage", stageService.findById(stageId));
+    public String initEditForm(@PathVariable("stageId") Long stageId, Model model){
+        model.addAttribute("stage", stageService.findById(stageId).get());
         return VIEW_STAGE_FROM;
 
     }
 
     @PostMapping("/stages/{stageId}/edit")
-    public String processEditForm(Crop crop, @Valid Stage stage, BindingResult result, Model model){
+    public String processEditForm(@PathVariable Long stageId, Crop crop, @Valid Stage stage, BindingResult result, Model model){
         if(result.hasErrors()) {
             stage.setCrop(crop);
             model.addAttribute("stage",stage);
             return result.getAllErrors().get(0).toString();
         }
         else {
-            crop.getStages().add(stage);
-            stageService.save(stage);
+            stage.setId(stageId);
+            stage.setCrop(crop);
+//            cropService.save(crop);
+            stageService.save(stage);  // has to be there to save the change
             return "redirect:/crops/" + crop.getId();
         }
     }

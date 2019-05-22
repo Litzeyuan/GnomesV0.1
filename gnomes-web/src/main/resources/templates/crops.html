@@ -46,7 +46,7 @@
                                 </thead>
                                 <tr th:each="crop : ${crops}">
                                     <td>date</td>
-                                    <td><a href="#" th:text="${crop.name}" th:href="@{'/crops/' + ${crop.id}}"></a></td>
+                                    <td><a th:text="${crop.name}" th:href="@{'/crops/' + ${crop.id}}"></a></td>
                                     <td th:text="${crop.currentStage}"></td>
                                     <td th:text="${crop.notes}"></td>
                                 </tr>

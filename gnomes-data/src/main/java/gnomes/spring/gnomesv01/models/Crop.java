@@ -68,7 +68,7 @@ public class Crop extends BaseEntity{
     }
 
     public Stage getStage(String name){
-        return getStage(name);
+        return getStage(name, false);
     }
 
     //overloading helper method
@@ -76,7 +76,8 @@ public class Crop extends BaseEntity{
         name = name.toLowerCase();
         for(Stage stage: stages){
             if(!ignoreNew || !stage.isNew()){
-                String compName = stage.getName().toLowerCase();
+                String compName = stage.getName();
+                compName = compName.toLowerCase();
                 if(compName.equals(name))
                     return stage;
             }

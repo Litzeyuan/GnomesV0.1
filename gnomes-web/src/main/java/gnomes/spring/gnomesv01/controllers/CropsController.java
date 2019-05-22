@@ -2,6 +2,7 @@ package gnomes.spring.gnomesv01.controllers;
 
 import gnomes.spring.gnomesv01.models.Crop;
 import gnomes.spring.gnomesv01.services.interfaces.CropService;
+import gnomes.spring.gnomesv01.services.interfaces.StageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,9 +20,12 @@ public class CropsController {
     private static final String VIEW_CROP_FROM = "crops/cropForm";
 
     private final CropService cropService;
+    private final StageService stageService;
 
-    public CropsController(CropService cropService) {
+
+    public CropsController(CropService cropService, StageService stageService) {
         this.cropService = cropService;
+        this.stageService = stageService;
     }
 
 
@@ -92,7 +96,7 @@ public class CropsController {
     }
 
     @GetMapping("/{cropId}/edit")
-    public String initEditForm(@PathVariable Long cropId, Model model){
+    public String initEditForm(@PathVariable("cropId") Long cropId, Model model){
         model.addAttribute("crop", cropService.findById(cropId).get());
         return VIEW_CROP_FROM;
 
@@ -105,6 +109,7 @@ public class CropsController {
         else {
             crop.setId(cropId);
             Crop savedCrop = cropService.save(crop);
+//            stageService.
             return "redirect:/crops/" + savedCrop.getId();
         }
     }
