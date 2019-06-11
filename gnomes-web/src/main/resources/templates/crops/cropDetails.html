@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -69,31 +69,42 @@
                                 <p th:text="${crop.compostUsed}"></p>
                             </div>
                         </div>
-
-                    </div>
-                </div>
-
-
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h1 class="panel-title">Stages</h1>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a class="btn btn-primary" th:href="@{{id}/stages/new(id=${crop.id})}" role="button">Add</a>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <ul th:each="stage: ${crop.stages}">
-                                    <a th:href="@{{cropId}/stages/{stageId}/edit(cropId=${crop.id},stageId=${stage.id})}">Edit</a>
-                                    <td th:text="${stage.name}"></td>
-                                </ul>
+                                <h5>Current Stage</h5>
+                            </div>
+                            <div class="col-md-3">
+                                <p th:text="${crop.currentStage}"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <h5><a th:href="@{{id}/stages/all(id=${crop.id})}">View all stages</a></h5>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
+
+<!--                <div class="panel panel-primary">-->
+<!--                    <div class="panel-heading">-->
+<!--                        <h1 class="panel-title">Stages</h1>-->
+<!--                    </div>-->
+<!--                    <div class="panel-body">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-12">-->
+<!--                                <a class="btn btn-primary" th:href="@{{id}/stages/new(id=${crop.id})}" role="button">Add</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-3">-->
+<!--                                <ul th:each="stage: ${crop.stages}">-->
+<!--                                    <a th:href="@{{cropId}/stages/{stageId}/edit(cropId=${crop.id},stageId=${stage.id})}">Edit</a>-->
+<!--                                    <td th:text="${stage.name}"></td>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
 
 <!--                <div class="col-md-12">-->

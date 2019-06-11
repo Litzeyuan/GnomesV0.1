@@ -66,7 +66,8 @@ class BedTest {
 
     @Test
     void getArea() {
-        Area area = new Area("A");
+        Area area = new Area();
+        area.setName("A");
         bed.setArea(area);
         assertEquals(area.getName(), bed.getArea().getName());
     }

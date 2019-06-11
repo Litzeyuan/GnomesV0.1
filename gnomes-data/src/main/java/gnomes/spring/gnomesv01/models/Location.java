@@ -1,9 +1,9 @@
 package gnomes.spring.gnomesv01.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -11,15 +11,16 @@ import java.util.List;
 
 @Data
 @EqualsAndHashCode(exclude="areas")
-@Builder
-@AllArgsConstructor
+//@Builder
+//@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "locations")
 public class Location extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long    id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long    id;
     private String  name;
     private String  address;
 
@@ -30,9 +31,9 @@ public class Location extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy="location")
     private List<Area> areas;
 
-    public Location(){};
-
-    public Location(String name, String address) {
+    @Builder
+    public Location(Long id, String name, String address) {
+        super(id);
         this.name = name;
         this.address = address;
     }

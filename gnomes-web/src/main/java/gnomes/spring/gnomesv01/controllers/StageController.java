@@ -34,9 +34,16 @@ public class StageController {
         dataBinder.setDisallowedFields("id");
     }
 
+
     @ModelAttribute("crop")
     public Crop findCrop(@PathVariable("cropId") Long cropId){
         return cropService.findById(cropId).get();
+    }
+
+    @RequestMapping("/stages/all")
+    public String listStages(Model model){
+        model.addAttribute("stages", stageService.findAll());
+        return "stages/showstages";
     }
 
     @GetMapping("/stages/new")
@@ -62,7 +69,7 @@ public class StageController {
             stage.setCrop(crop);  //has to be there
             stageService.save(stage);
 //            cropService.save(crop);
-            return "redirect:/crops/" + crop.getId();
+            return "redirect:/crops/" + crop.getId() + "/stages/all";
         }
     }
 
@@ -85,7 +92,7 @@ public class StageController {
             stage.setCrop(crop);
 //            cropService.save(crop);
             stageService.save(stage);  // has to be there to save the change
-            return "redirect:/crops/" + crop.getId();
+            return "redirect:/crops/" + crop.getId() + "/stages/all";
         }
     }
 

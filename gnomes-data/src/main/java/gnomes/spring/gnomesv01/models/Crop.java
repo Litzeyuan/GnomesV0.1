@@ -17,9 +17,9 @@ import java.util.List;
 @Table(name = "crops")
 public class Crop extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long    id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long    id;
     private String  name;
     private	String  variety;
     private	String sowingType; //Nursery or Direct
@@ -32,8 +32,8 @@ public class Crop extends BaseEntity{
 
     @Builder
     public Crop(Long id, String name, String variety, String sowingType, String seedVender, LocalDate seedBoughtDate, String compostUsed, String currentStage, String notes, List<Stage> stages, List<Bed> beds) {
-        this.id = id;
-//        super(id);
+//        this.id = id;
+        super(id);
         this.name = name;
         this.variety = variety;
         this.sowingType = sowingType;

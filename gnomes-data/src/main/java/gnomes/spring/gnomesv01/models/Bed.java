@@ -1,9 +1,9 @@
 package gnomes.spring.gnomesv01.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -11,8 +11,8 @@ import java.util.List;
 
 @Data
 @EqualsAndHashCode(exclude={"area","crops"})
-@Builder
-@AllArgsConstructor
+//@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "beds")
 public class Bed extends BaseEntity{
@@ -39,8 +39,9 @@ public class Bed extends BaseEntity{
     @ManyToMany(mappedBy = "beds")
     private List<Crop> crops;
 
-    public Bed(){};
-    public Bed(String name) {
+    @Builder
+    public Bed(Long id, String name) {
+        super(id);
         this.name = name;
     }
 

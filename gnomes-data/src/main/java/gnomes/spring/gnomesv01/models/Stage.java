@@ -1,17 +1,21 @@
 package gnomes.spring.gnomesv01.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Data
 @EqualsAndHashCode(exclude="crop")
-@Builder
-@AllArgsConstructor
+//@Builder
+//@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "stages")
 public class Stage extends BaseEntity{
@@ -24,9 +28,9 @@ public class Stage extends BaseEntity{
     private final static String HARVEST_STAGE = "Harvest - HV";
 
     // Common fields
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     private String name;
     private boolean isCurrent;
     private LocalDate date;
@@ -74,8 +78,9 @@ public class Stage extends BaseEntity{
     @JoinColumn(name = "crop_id")
     private Crop crop;
 
-    public Stage(){};
-    public Stage(String name) {
+    @Builder
+    public Stage(Long id, String name) {
+        super(id);
         this.name = name;
     }
 

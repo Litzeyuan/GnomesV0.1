@@ -84,7 +84,7 @@ class StageControllerTest {
 
         mockMvc.perform(post("/crops/1/stages/new"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/crops/1"));
+                .andExpect(view().name("redirect:/crops/1/stages/all"));
 
         verify(stageService).save(any());
     }
@@ -107,10 +107,8 @@ class StageControllerTest {
 
         mockMvc.perform(post("/crops/1/stages/1/edit"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/crops/1"));
+                .andExpect(view().name("redirect:/crops/1/stages/all"));
 
         verify(stageService).save(any());
     }
-
-
 }

@@ -1,24 +1,24 @@
 package gnomes.spring.gnomesv01.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Data
 @EqualsAndHashCode(exclude={"beds","location"})
-@Builder
-@AllArgsConstructor
+//@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "areas")
 public class Area extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     private String name;
 
     @Column(nullable = true)
@@ -32,8 +32,9 @@ public class Area extends BaseEntity{
     @JoinColumn(name = "location_id")
     private Location location;
 
-    public Area(){};
-    public Area(String name) {
+    @Builder
+    public Area(Long id, String name) {
+        super(id);
         this.name = name;
     }
 

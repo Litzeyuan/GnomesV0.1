@@ -21,7 +21,8 @@ class LocationTest {
     void getTotalBeds() {
         List<Bed> beds = new ArrayList<>();
         List<Area> areas = new ArrayList<>();
-        Area area = Area.builder().beds(beds).build();
+        Area area = Area.builder().build();
+        area.setBeds(beds);
         area.addBed(Bed.builder().build());
         area.addBed(Bed.builder().build());
         areas.add(area);

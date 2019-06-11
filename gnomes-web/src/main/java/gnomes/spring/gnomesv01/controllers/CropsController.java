@@ -2,7 +2,6 @@ package gnomes.spring.gnomesv01.controllers;
 
 import gnomes.spring.gnomesv01.models.Crop;
 import gnomes.spring.gnomesv01.services.interfaces.CropService;
-import gnomes.spring.gnomesv01.services.interfaces.StageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,12 +19,10 @@ public class CropsController {
     private static final String VIEW_CROP_FROM = "crops/cropForm";
 
     private final CropService cropService;
-    private final StageService stageService;
 
 
-    public CropsController(CropService cropService, StageService stageService) {
+    public CropsController(CropService cropService) {
         this.cropService = cropService;
-        this.stageService = stageService;
     }
 
 
@@ -35,7 +32,6 @@ public class CropsController {
     }
 
     @RequestMapping("/all")
-//    @RequestMapping("/listCrops")
     public String listCrops(Model model){
         //thyme leaf will lookup a template called crops
         model.addAttribute("crops", cropService.findAll());
@@ -104,12 +100,12 @@ public class CropsController {
 
     @PostMapping("/{cropId}/edit")
     public String processEditForm(@Valid Crop crop, BindingResult result, @PathVariable("cropId") Long cropId){
+
         if(result.hasErrors())
             return result.getAllErrors().get(0).toString();
         else {
             crop.setId(cropId);
             Crop savedCrop = cropService.save(crop);
-//            stageService.
             return "redirect:/crops/" + savedCrop.getId();
         }
     }

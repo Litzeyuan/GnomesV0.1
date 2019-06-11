@@ -38,12 +38,25 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">Notes</h2>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-10 form-group">
+                                    <textarea type="text" class="form-control" th:field="*{notes}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button class="btn btn-primary" type="submit">Confirm</button>
-                        <a class="btn btn-primary" th:href="@{/crops/__${crop.id}__}" role="button">Cancel</a>
+                        <a class="btn btn-primary" th:with="href=${crop.id == null} ? '/crops/all' : '/crops/'+ ${crop.id}" th:href="${href}" role="button">Cancel</a>
                     </div>
                 </div>
             </form>
